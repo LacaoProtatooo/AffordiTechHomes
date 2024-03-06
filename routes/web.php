@@ -37,7 +37,7 @@ Route::get('/', [PropertyController::class, 'homepopulate'])->name('home');
 
 // LOGIN & LOGOUT
 Route::get('/login', [LoginController::class, 'loginpage'])->name('login.loginpage');
-Route::post('/home', [LoginController::class, 'login'])->name('login.submit');
+Route::post('/', [LoginController::class, 'login'])->name('login.submit');
 Route::match(['get', 'post'], '/logout', [LoginController::class, 'logout'])->name('logout');
 
 // SIGNUP
@@ -53,6 +53,7 @@ Route::middleware('admin')->group(function () {
     Route::get('/admin/agents', [Admincontroller::class, 'agents'])->name('admin.agents');
     Route::get('/admin/properties', [Admincontroller::class, 'properties'])->name('admin.properties');
 
+    Route::get('/admin/{id}/propertydetails', [Admincontroller::class, 'details'])->name('admin.propertydetails');
     Route::get('/admin/{id}/propertyapprove', [Admincontroller::class, 'approve'])->name('admin.approveproperty');
     Route::get('/admin/{id}/propertyreject', [Admincontroller::class, 'reject'])->name('admin.rejectproperty');
 
@@ -72,6 +73,8 @@ Route::middleware('customer')->group(function () {
     Route::get('/customer/inquire/{id}', [CustomerController::class, 'inquire'])->name('customer.inquire');
     Route::get('/customer/inquire/delete/{customer_id}/{property_id}', [CustomerController::class, 'deleteInquiry'])->name('inquire.delete');
     Route::get('/customer/view/transaction', [CustomerController::class, 'transaction'])->name('customer.transaction');
+
+    Route::get('/schedule/customerschedule/{id}', [ScheduleController::class, 'CustomerScheduleStore'])->name('customer.schedule');
 });
 
 // Agent
@@ -98,15 +101,12 @@ Route::middleware('agent')->group(function () {
     Route::prefix('schedule')->group(function () {
         Route::get('/create', [ScheduleController::class, 'create'])->name('schedule.create');
         Route::post('/store', [ScheduleController::class, 'store'])->name('schedule.store');
-        Route::get('/customerschedule/{id}', [ScheduleController::class, 'CustomerScheduleStore'])->name('customer.schedule');
     });
 
 });
 
 // Property Info
 Route::get('/property/info', [PropertyController::class, 'propertyinfo'])->name('property.info');
-
-
 
 Route::post('/property/search', [PropertyController::class, 'search'])->name('property.search');
 

@@ -172,7 +172,7 @@
                             if($property->status != 'available'){
                               // get payment method
                               foreach($solds as $sold){
-                                if($sold->id == $property->id){
+                                if($sold->property_id == $property->id){
                                   $pyment = $sold->payment_method;
                                   break;
                                 }
@@ -188,15 +188,17 @@
                             <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md dark:bg-gray-700 dark:text-green-400 border border-green-100 dark:border-green-500">{{$property->status}}</span>
                         </td>
                         @php
-                        // VERIFY THE PAYMENT METHOD
-                          if($property->status != 'available')
-                                echo "
-                                <td>
-                                    <!-- IF SOLD (MAKE IT APPROVED)-->
-                                    <button type='button' class='text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-0'>VERIFY</button>
-                                </td>
-                                ";
+                            // VIEW DETAILS THE PAYMENT METHOD
+                            if ($property->status != 'available') {
+                                echo '
+                                    <td>
+                                        <!-- IF SOLD (MAKE IT APPROVED)-->
+                                        <button type="button" onclick="window.location.href=\''. route('admin.propertydetails', $property->id) .'\'" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-0">Details</button>
+                                    </td>
+                                ';
+                            }
                         @endphp
+
 
                       </tr>
                     @endforeach

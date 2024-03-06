@@ -11,10 +11,10 @@ $currentUser = Auth::user();
             <!--PROPERTY TYPE DROPDOWN-->
             <select name="property_type" class="bg-gradient-to-r mr-3 from-teal-400 via-teal-500 to-teal-600 border border-black-300 text-gray-900 mb-0 text-sm rounded-lg focus:border-blue-500 block w-40 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 shadow-lg shadow-teal-500/50 dark:shadow-lg dark:shadow-teal-800/80">
                 <option selected disabled>Property Type</option>
-                <option value="APARTMENT">APARTMENT</option>
-                <option value="CONDOMINIUM">CONDOMINIUM</option>
-                <option value="HOUSE">HOUSE</option>
-                <option value="LAND">LAND</option>
+                <option value="APARTMENT">Apartment</option>
+                <option value="CONDOMINIUM">Condominium</option>
+                <option value="HOUSE">House</option>
+                <option value="LAND">Land</option>
             </select>
             
             <!--BEDROOMS DROPDOWN-->
@@ -53,13 +53,13 @@ $currentUser = Auth::user();
                 <option value="available">available</option>
             </select>
 
-            <button type="submit" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:px-6 hover:py-3.5 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-8 py-3 text-center">Search</button>
+            <button type="submit" class="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:px-6 hover:py-3.5 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 shadow-lg shadow-teal-500/50 dark:shadow-lg dark:shadow-teal-800/80 font-medium rounded-lg text-sm px-8 py-3 text-center mt-2 me-2 mb-0">Search</button>
         </form>
 
         @if ($currentUser)
-        <button type="button" class="text-white mr-2 bg-gradient-to-r mt-2 from-blue-500 via-blue-600 to-blue-700 hover:px-6 hover:py-3.5 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-0 flex justify-end" onclick="window.location.href='{{route('customer.inquiry')}}';">Inquired Property</button>
-        <button type="button" class="text-white mr-2 bg-gradient-to-r mt-2 from-blue-500 via-blue-600 to-blue-700 hover:px-6 hover:py-3.5 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-0 flex justify-end" onclick="window.location.href='{{route('customer.appointment')}}';">View Schedule</button>
-        <button type="button" class="text-white mr-2 bg-gradient-to-r mt-2 from-blue-500 via-blue-600 to-blue-700 hover:px-6 hover:py-3.5 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-0 flex justify-end" onclick="window.location.href='{{route('customer.transaction')}}';">Transaction</button>
+        <button type="button" class="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:px-6 hover:py-3.5 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 shadow-lg shadow-teal-500/50 dark:shadow-lg dark:shadow-teal-800/80 font-medium rounded-lg text-sm px-8 py-3 text-center mt-2 me-2 mb-0 flex justify-end" onclick="window.location.href='{{route('customer.inquiry')}}';">Inquired Property</button>
+        <button type="button" class="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:px-6 hover:py-3.5 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 shadow-lg shadow-teal-500/50 dark:shadow-lg dark:shadow-teal-800/80 font-medium rounded-lg text-sm px-8 py-3 text-center mt-2 me-2 mb-0 flex justify-end" onclick="window.location.href='{{route('customer.appointment')}}';">View Schedule</button>
+        <button type="button" class="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:px-6 hover:py-3.5 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 shadow-lg shadow-teal-500/50 dark:shadow-lg dark:shadow-teal-800/80 font-medium rounded-lg text-sm px-8 py-3 text-center mt-2 me-2 mb-0 flex justify-end" onclick="window.location.href='{{route('customer.transaction')}}';">Transaction</button>
         @endif
     </div>
 </nav>

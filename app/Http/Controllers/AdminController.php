@@ -166,4 +166,15 @@ class AdminController extends Controller
 
         return redirect()->route('admin.dashboard');
     }
+
+    public function details($id){
+        $propertyinfo = Property::find($id);
+        $agentinfo = Agent::where('id', $propertyinfo->agent_id)->first();
+        $soldproperty = Solds::where('property_id', $propertyinfo->id)->first();
+        $customerinfo = Customer::where('id', $soldproperty->customer_id)->first();
+        $usercustomer = User::where('id', $customerinfo->user_id)->first();
+        $useragent = User::where('id', $agentinfo->user_id)->first();
+
+        return View('admin.propertydetails', compact('propertyinfo','agentinfo','soldproperty','customerinfo','usercustomer','useragent'));
+    }
 }
