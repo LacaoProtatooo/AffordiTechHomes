@@ -39,11 +39,11 @@ class ScheduleController extends Controller
         ->where('properties.agent_id', $agentinfo->id)
         ->where('approvals.status_of_approval', 'approved')
         ->get();
-        $propertyid = DB::table('properties')
+       /* $propertyid = DB::table('properties')
         ->select('id') 
-        ->get();
+        ->get(); */
 
-        return view('schedule.create', compact('properties','propertyid'));
+        return view('schedule.create', compact('properties'));
     }
 
     public function store(Request $request)
