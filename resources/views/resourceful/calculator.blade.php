@@ -10,7 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <title>AffordiTech Loan Calculator</title>
 </head>
-<body class="bg-green-200 ">
+<body class="bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 ">
     @include('common.header')
 
     <div class="container mx-auto mt-10 px-4">
@@ -41,7 +41,7 @@
             </div>
             <div class="text-center">
                 <button onclick="calculateLoan()"
-                    class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Calculate</button>
+                    class=" text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Calculate</button>
             </div>
             <div class="mt-6">
                 <p class="text-lg font-semibold">Loan Details:</p>
