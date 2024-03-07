@@ -65,7 +65,7 @@ class AdminController extends Controller
         $admin->sex = $request->sex;
         $admin->birthdate = $birthdate; 
         $admin->save();
-        auth()->login($user);
+        //auth()->login($user);
     
         return redirect()->route('login.loginpage')->with('successregister', true);
     }
