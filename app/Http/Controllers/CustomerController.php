@@ -59,7 +59,7 @@ class CustomerController extends Controller
         $customer->Sex = $request->sex;
         $customer->Birthdate = $birthdate; 
         $customer->save();
-        auth()->login($user);
+        //auth()->login($user);
 
         return redirect()->route('login.loginpage')->with('successregister', true);
     }

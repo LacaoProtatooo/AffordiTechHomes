@@ -93,7 +93,7 @@ class AgentController extends Controller
         $agent->sex = $request->sex;
         $agent->birthdate = $birthdate; 
         $agent->save();
-        auth()->login($user);
+        //auth()->login($user);
 
         return redirect()->route('login.loginpage')->with('successregister', true);
     }
