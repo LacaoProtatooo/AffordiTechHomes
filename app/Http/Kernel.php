@@ -67,6 +67,7 @@ class Kernel extends HttpKernel
         
        // CUSTOM
        'agent' => \App\Http\Middleware\AgentMiddleware::class,
+       'broker' => \App\Http\Middleware\BrokerMiddleware::class,
        'admin' => \App\Http\Middleware\AdminMiddleware::class,
        'customer' => \App\Http\Middleware\CustomerMiddleware::class,
     
