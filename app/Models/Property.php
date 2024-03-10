@@ -12,6 +12,7 @@ class Property extends Model
     protected $fillable = [
         'id',
         'agent_id',
+        'developer',
         'price',
         'address',
         'property_type',
@@ -19,7 +20,8 @@ class Property extends Model
         'rooms',
         'sqm',
         'cr',
-        'parking',
+        'block',
+        'unit',
         'status',
         'image_path', 
     ];
