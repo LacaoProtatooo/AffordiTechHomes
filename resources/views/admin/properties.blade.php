@@ -63,7 +63,7 @@
                     @endphp
                     
                     <tr class="bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-green-700 dark:hover:bg-gray-600">
-                        <td class="px-6 py-4 text-right">
+                        <td class="px-6 py-4 text-right"> 
                             @foreach ($approval as $aprstatus)
                                 @if ($property->id == $aprstatus->property_id)
                                     @if ($aprstatus->status_of_approval == 'pending')
