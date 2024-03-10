@@ -13,21 +13,23 @@ return new class extends Migration
     {
         Schema::create('properties', function (Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->unsignedBigInteger('agent_id');
+            $table->unsignedBigInteger('admin_id');
+            $table->string('developer');
             $table->decimal('price', 12, 2);
             $table->string('address');
             $table->string('property_type');
+            $table->string('block');
+            $table->string('unit');
             $table->string('description');
             $table->string('rooms');
             $table->integer('sqm');
             $table->string('cr');
-            $table->string('parking');
             $table->string('status');
             $table->longText('image_path')->nullable();
             $table->timestamps(); 
 
             // FK
-            $table->foreign('agent_id')->references('id')->on('agents')->onDelete('cascade');
+            $table->foreign('admin_id')->references('id')->on('admins')->onDelete('cascade');
         });
     }
 
