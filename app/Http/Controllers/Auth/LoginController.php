@@ -6,11 +6,12 @@ use App\Models\User;
 use App\Models\Customer;
 use App\Models\Agent;
 use App\Models\Admin;
-
+use App\Models\Broker;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AgentController;
+use App\Http\Controllers\BrokerController;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
@@ -34,8 +35,13 @@ class LoginController extends Controller
 
         }elseif ($role === 'admin') {
             return app(AdminController::class)->register($request);
-
-        } else {
+        }
+        elseif ($role === 'broker')
+        {
+            return app(BrokerController::class)->register($request);
+        }
+        else 
+        {
             dd('error');
         }
     }
