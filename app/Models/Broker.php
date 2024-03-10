@@ -9,12 +9,13 @@ class Broker extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'id',
         'user_id',
-        'Name',
-        'Phone_number',
-        'Address',
-        'Sex',
-        'Birthdate',
+        'name',
+        'phone_number',
+        'address',
+        'sex',
+        'birthdate',
         'created_at',
         'updated_at',
     ];

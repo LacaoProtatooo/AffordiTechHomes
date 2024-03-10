@@ -11,20 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('solds', function (Blueprint $table) {
+        Schema::create('visits', function (Blueprint $table) {
             $table->id()->autoIncrement();
+            $table->string('approval_status');
+            $table->dateTime('schedule');
             $table->unsignedBigInteger('customer_id');
-            $table->unsignedBigInteger('property_id');
             $table->unsignedBigInteger('agent_id');
-            $table->string('payment_method');
-            $table->string('proof_payment');
-            $table->timestamps(); 
+            $table->unsignedBigInteger('property_id');
+            $table->string('approval_status');
 
             // FK
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
-            $table->foreign('property_id')->references('id')->on('properties')->onDelete('cascade');
             $table->foreign('agent_id')->references('id')->on('agents')->onDelete('cascade');
-
+            $table->foreign('property_id')->references('id')->on('properties')->onDelete('cascade');
         });
     }
 
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('solds');
+        Schema::dropIfExists('visits');
     }
 };

@@ -14,8 +14,10 @@ class Solds extends Model
         'id',
         'customer_id',
         'property_id',
+        'agent_id',
         'payment_method',
         'proof_payment',
-         
+        'created_at',
+        'updated_at',
     ];
 }

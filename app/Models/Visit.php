@@ -5,16 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Schedules extends Model
+class Visit extends Model
 {
     use HasFactory;
-    protected $table = 'schedules';
+    protected $table = 'visits';
     protected $fillable = [
         'id',
+        'schedule',
+        'convoy_type',
         'agent_id',
+        'customer_id',
         'property_id',
-        'time_schedule',
-        'created_at',
-        'updated_at',
+        'approval_status',
     ];
 }
