@@ -12,6 +12,38 @@
     @include('message')
     @include('common.header')
 
+    <nav class="bg-transparent ">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 ">
+        <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse"></div>
+
+        <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1 bg-transparent" id="navbar-cta">
+            <div class="flex flex-col font-medium p-4 md:p-0 mt-0 border border-gray-100 rounded-lg bg-transparent md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                {{-- Add Property --}}
+                <button onclick="location.href='{{ route('property.create') }}';" class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+                    <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">Add Property</span>
+                </button>
+                {{-- Add Schedules --}}
+                <button onclick="location.href='{{ route('schedule.create') }}';" class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+                    <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">Add Schedule</span>
+                </button>
+                {{-- Check Appointments --}}
+                <button onclick="location.href='{{ route('agent.appointment') }}';" class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+                    <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">Check Appointments</span>
+                </button>
+                {{-- Inquiry --}}
+                <button onclick="location.href='{{route('agent.inquiry')}}';" class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+                    <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">Check Inquiries</span>
+                </button>
+                {{-- Transaction --}}
+                <button onclick="location.href='{{route('agent.transaction')}}';" class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+                    <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">Sold Properties</span>
+                </button>
+            </div>
+        </div>
+
+        </div>
+    </nav>
+
     {{-- TABLE --}}
     <div class = "items-center justify-between mb-10 ml-10 mr-10 mt-10 w-full md:w-auto md:order-1 bg-green-200">
         <div class="relative overflow-x-auto shadow-2xl sm:rounded-lg">
@@ -64,36 +96,8 @@
                     
                     <tr class="bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-green-700 dark:hover:bg-gray-600">
                         <td class="px-6 py-4 text-right"> 
-                            @foreach ($approval as $aprstatus)
-                                @if ($property->id == $aprstatus->property_id)
-                                    @if ($aprstatus->status_of_approval == 'pending')
-
-                                        <button onclick="confirmAction('{{ route('admin.approveproperty', $property->id) }}', 'Publish this property?')"
-                                            class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
-                                            <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                                                Approve
-                                            </span>
-                                        </button>
-                                        
-                                        <button onclick="confirmAction('{{ route('admin.rejectproperty', $property->id) }}', 'Reject this property?')"
-                                            class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-red-200 via-red-300 to-yellow-200 group-hover:from-red-200 group-hover:via-red-300 group-hover:to-yellow-200 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400">
-                                            <span class="relative px-7 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                                               Reject
-                                            </span>
-                                        </button>
-                                        
-                                        <script>
-                                            function confirmAction(url, message) {
-                                                if (confirm(message)) {
-                                                    window.location.href = url;
-                                                }
-                                            }
-                                        </script>
-                                 @endif
-                                @endif
-                            @endforeach
+                            {{--Status to na wala na, gagawin ko sanang update at delete kaso hindi nag aalign--}}
                         </td>
-
                         <td class="px-6 py-4">
                             @foreach ($approval as $aprstatus)
                                 @if ($property->id == $aprstatus->property_id)
@@ -127,7 +131,7 @@
                             {{ $property->status }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $property->parking }}
+                            {{ $property->block }}
                         </td>
 
                         <td class="px-6 py-4 flex space-x-2">
