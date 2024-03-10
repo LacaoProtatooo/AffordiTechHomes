@@ -155,6 +155,9 @@ class PropertyController extends Controller
         $property = Property::find($id);
 
         $validatedData = $request->validate([
+            'developer' => 'required',
+            'block' => 'required',
+            'unit' => 'required',
             'price' => 'required|numeric',
             'propertytype' => 'required',
             'address' => 'required',
@@ -162,11 +165,9 @@ class PropertyController extends Controller
             'rooms' => 'required',
             'sqm' => 'required|numeric',
             'cr' => 'required',
-            'parking' => 'required',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif',
-            'status' => 'required'
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif'
         ]);
-
+        $property->developer = $validatedData['developer'];
         $property->price = $validatedData['price'];
         $property->address = $validatedData['address'];
         $property->property_type = $validatedData['propertytype'];
@@ -174,7 +175,8 @@ class PropertyController extends Controller
         $property->rooms = $validatedData['rooms'];
         $property->sqm = $validatedData['sqm'];
         $property->cr = $validatedData['cr'];
-        $property->parking = $validatedData['parking'];
+        $property->unit = $validatedData['unit'];
+        $property->block = $validatedData['block'];
         $property->status = $validatedData['status'];
     
         if ($request->hasFile('images')) {
@@ -186,12 +188,12 @@ class PropertyController extends Controller
         }
 
         $property->save();
-        return redirect()->route('agent.dashboard');
+        return redirect()->route('admin.dashboard');
     }
 
     public function delete($id){
         property::destroy($id);
-        return redirect()->route('agent.dashboard');
+        return redirect()->route('admin.dashboard');
     }
 
     public function search(Request $request)
