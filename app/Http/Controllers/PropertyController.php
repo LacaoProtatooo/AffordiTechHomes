@@ -44,6 +44,11 @@ class PropertyController extends Controller
         return view('home.home', compact('properties'));
     }
 
+    public function welcome(){
+
+        return view('home.front');
+    }
+
     public function sold(Request $request, $customer_id, $property_id)
     {
         $request->validate([
