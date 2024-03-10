@@ -14,11 +14,14 @@ return new class extends Migration
         Schema::create('inquiries', function (Blueprint $table) {
             $table->unsignedBigInteger('property_id');
             $table->unsignedBigInteger('customer_id');
-            $table->string('date_inquire');
+            $table->unsignedBigInteger('agent_id')->nullable();
+            $table->unsignedBigInteger('broker_id');
 
             // FK
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->foreign('property_id')->references('id')->on('properties')->onDelete('cascade');
+            $table->foreign('broker_id')->references('id')->on('brokers')->onDelete('cascade');
+            $table->foreign('agent_id')->references('id')->on('agents')->onDelete('cascade');
         });
     }
 

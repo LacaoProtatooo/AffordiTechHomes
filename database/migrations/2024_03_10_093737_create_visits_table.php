@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('visits', function (Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->string('approval_status');
             $table->dateTime('schedule');
+            $table->string('convoy_type');
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('agent_id');
             $table->unsignedBigInteger('property_id');
