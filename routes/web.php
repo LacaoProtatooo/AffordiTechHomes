@@ -33,7 +33,8 @@ use App\Http\Controllers\ScheduleController;
 */
 
 // Homepopulate
-Route::get('/', [PropertyController::class, 'homepopulate'])->name('home');
+Route::get('/home', [PropertyController::class, 'homepopulate'])->name('home');
+Route::get('/', [PropertyController::class, 'welcome'])->name('welcome');
 
 // LOGIN & LOGOUT
 Route::get('/login', [LoginController::class, 'loginpage'])->name('login.loginpage');
