@@ -45,7 +45,7 @@ Route::get('/register/{role}', [LoginController::class, 'signup'])->name('signup
 Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('signup.submit');
 
 // Admin
-Route::middleware('admin')->group(function () {
+//Route::middleware('admin')->group(function () {
     Route::get('/admin/dashboard', [Admincontroller::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/profile', [Admincontroller::class, 'adminprofile'])->name('admin.profile');
     Route::post('/admin/update', [Admincontroller::class, 'update'])->name('admin.update');
@@ -59,10 +59,10 @@ Route::middleware('admin')->group(function () {
 
     Route::get('/admin/{id}/agentprofile', [Admincontroller::class, 'agentprofile'])->name('admin.agentprofile');
     Route::get('/admin/{id}/delete', [Admincontroller::class, 'delete'])->name('admin.agentdelete');
-});
+//});
 
 // Customer
-Route::middleware('customer')->group(function () {
+//Route::middleware('customer')->group(function () {
     Route::get('/customer/dashboard', [CustomerController::class, 'index'])->name('customer.dashboard');
 
     Route::get('/customer/profile', [CustomerController::class, 'customerprofile'])->name('customer.profile');
@@ -75,10 +75,10 @@ Route::middleware('customer')->group(function () {
     Route::get('/customer/view/transaction', [CustomerController::class, 'transaction'])->name('customer.transaction');
 
     Route::get('/schedule/customerschedule/{id}', [ScheduleController::class, 'CustomerScheduleStore'])->name('customer.schedule');
-});
+//});
 
 // Agent
-Route::middleware('agent')->group(function () {
+//Route::middleware('agent')->group(function () {
     Route::get('/agent/dashboard', [AgentController::class, 'index'])->name('agent.dashboard');
     Route::get('/agent/view/Appointment', [AgentController::class, 'appointment'])->name('agent.appointment');
     Route::get('/agent/view/transaction', [AgentController::class, 'transaction'])->name('agent.transaction');
@@ -103,7 +103,7 @@ Route::middleware('agent')->group(function () {
         Route::post('/store', [ScheduleController::class, 'store'])->name('schedule.store');
     });
 
-});
+//});
 
 // Property Info
 Route::get('/property/info', [PropertyController::class, 'propertyinfo'])->name('property.info');
