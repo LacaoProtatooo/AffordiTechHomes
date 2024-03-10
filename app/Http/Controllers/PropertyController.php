@@ -158,6 +158,7 @@ class PropertyController extends Controller
             'developer' => 'required',
             'block' => 'required',
             'unit' => 'required',
+            'status' => 'required',
             'price' => 'required|numeric',
             'propertytype' => 'required',
             'address' => 'required',
