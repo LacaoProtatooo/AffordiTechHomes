@@ -15,12 +15,16 @@ return new class extends Migration
             $table->id()->autoIncrement();
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('property_id');
+            $table->unsignedBigInteger('agent_id');
             $table->string('payment_method');
             $table->string('proof_payment');
+            $table->timestamps(); 
 
             // FK
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->foreign('property_id')->references('id')->on('properties')->onDelete('cascade');
+            $table->foreign('agent_id')->references('id')->on('agents')->onDelete('cascade');
+
         });
     }
 
