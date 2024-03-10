@@ -51,10 +51,13 @@
                 <thead class="text-xs text-white uppercase dark:bg-gray-700 dark:text-gray-400 bg-green-900">
                     <tr>
                         <th scope="col" class="px-6 py-3">
-                            <span class="sr-only">publish</span>
+                            Update
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Approval Status
+                           Delete
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Developer
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Property Type
@@ -95,17 +98,15 @@
                     @endphp
                     
                     <tr class="bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-green-700 dark:hover:bg-gray-600">
-                        <td class="px-6 py-4 text-right"> 
-                            {{--Status to na wala na, gagawin ko sanang update at delete kaso hindi nag aalign--}}
+                        <td class="px-6 py-4">
+                            <a href="{{route('property.edit',$property->id)}}" class="text-blue-500 hover:text-blue-700 transition duration-300 ease-in-out">Update</a>
                         </td>
                         <td class="px-6 py-4">
-                            @foreach ($approval as $aprstatus)
-                                @if ($property->id == $aprstatus->property_id)
-                                    {{ $aprstatus->status_of_approval }}
-                                @endif
-                            @endforeach
+                            <a href="{{route('property.delete',$property->id)}}" class="text-blue-500 hover:text-blue-700 transition duration-300 ease-in-out">Delete</a>
                         </td>
-
+                        <td class="px-6 py-4">
+                            {{ $property->developer }}
+                        </td>
                         <td class="px-6 py-4">
                             {{ $property->property_type }}
                         </td>
