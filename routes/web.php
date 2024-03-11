@@ -8,6 +8,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\BrokerController;
 use App\Http\Controllers\ScheduleController;
 /*
 |--------------------------------------------------------------------------
@@ -86,8 +87,6 @@ Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('s
     Route::get('/agent/view/inquiry', [AgentController::class, 'inquiry'])->name('agent.inquiry');
 
     Route::get('/agent/profile', [AgentController::class, 'agentprofile'])->name('agent.profile');
-    Route::post('/agent/update', [AgentController::class, 'update'])->name('agent.update');
-
     // Property
     Route::get('/property/create', [PropertyController::class, 'create'])->name('property.create');
     Route::post('/property/store', [PropertyController::class, 'store'])->name('property.store');
@@ -105,6 +104,13 @@ Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('s
     });
 
 //});
+
+//broker
+Route::get('/broker/dashboard', [BrokerController::class, 'index'])->name('broker.dashboard');
+
+
+Route::get('/broker/profile', [BrokerController::class, 'brokerprofile'])->name('broker.profile');
+Route::post('/broker/update', [BrokerController::class, 'update'])->name('broker.update');
 
 // Property Info
 Route::get('/property/info', [PropertyController::class, 'propertyinfo'])->name('property.info');
