@@ -50,8 +50,8 @@ Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('s
 // Admin:
 // Broker Create
 // Property Create 
-// Approves Convoy and Scheduling 
-// Monitors and Approves Unit Sold
+// Approves Convoy and Scheduling (MUST FINISH AGENT AND BROKER INTERFACE FIRST)
+// Monitors and Approves Unit Sold 
 
 // ADMIN
 //Route::middleware('admin')->group(function () {

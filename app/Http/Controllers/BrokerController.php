@@ -16,8 +16,6 @@ class BrokerController extends Controller
         return view('broker.index',compact('brokerinfo'));
     }
 
-    
-
     public function brokerprofile(){
         $user = auth()->user();
         $brokerinfo = Broker::where('user_id', $user->id)->first();
