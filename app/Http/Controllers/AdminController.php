@@ -29,13 +29,15 @@ class AdminController extends Controller
         $approval = Approval::All();
         $properties = Property::All();
         $agents = Agent::All();
+        $brokers = Broker::All();
         $users = User::All();
 
         $usercount = User::count();
         $propertycount = Property::count();
         $agentcount = Agent::count();
+        $brokercount = Broker::count();
 
-        return view('admin.index', compact('properties','admininfo','solds','approval','agents','users','usercount','propertycount','agentcount'));
+        return view('admin.index', compact('properties','admininfo','solds','approval','agents','users','usercount','propertycount','agentcount','brokercount','brokers'));
     }
     
     public function register(Request $request){
