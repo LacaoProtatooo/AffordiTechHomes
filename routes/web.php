@@ -131,6 +131,12 @@ Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('s
 
 //});
 
+//broker
+Route::get('/broker/dashboard', [BrokerController::class, 'index'])->name('broker.dashboard');
+Route::get('/broker/profile', [BrokerController::class, 'brokerprofile'])->name('broker.profile');
+Route::post('/broker/update', [BrokerController::class, 'update'])->name('broker.update');
+
+
 // Property Info
 Route::get('/property/info', [PropertyController::class, 'propertyinfo'])->name('property.info');
 Route::post('/property/search', [PropertyController::class, 'search'])->name('property.search');
