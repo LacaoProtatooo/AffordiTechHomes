@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 use DB;
 class BrokerController extends Controller
 {
+    public function create(){
+        return view('admin.brokercreate');
+    }
+
     public function register(Request $request){
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
@@ -19,6 +23,8 @@ class BrokerController extends Controller
             'sex' => 'required|string|in:male,female',
             'birthdate' => 'required|date',
         ]);
+
+        dd($validatedData);
 
         $birthdate = date('Y-m-d', strtotime($request->birthdate));
 
@@ -35,8 +41,7 @@ class BrokerController extends Controller
         $Broker->sex = $request->sex;
         $Broker->birthdate = $birthdate; 
         $Broker->save();
-        //auth()->login($user);
 
-        return redirect()->route('login.loginpage')->with('successregister', true);
+        return redirect()->route('admin.dashboard')->with('successregister', true);
     }
 }

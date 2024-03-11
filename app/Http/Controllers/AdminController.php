@@ -7,6 +7,7 @@ use App\Models\Customer;
 use App\Models\User;
 use App\Models\Solds;
 use App\Models\Agent;
+use App\Models\Broker;
 use App\Models\Property;
 use App\Models\Approval;
 use App\Models\Schedules;
@@ -112,17 +113,17 @@ class AdminController extends Controller
         return redirect()->route('admin.dashboard');
     }
 
-    public function agents(){
+    public function brokers(){
         $user = Auth::user();
         $admininfo = Admin::where('user_id', $user->id)->first();
 
         $solds = Solds::All();
         $approval = Approval::All();
         $properties = Property::All();
-        $agents = Agent::All();
+        $brokers = Broker::All();
         $users = User::All();
 
-        return view('admin.agents', compact('properties','admininfo','solds','approval','agents','users'));
+        return view('admin.brokers', compact('properties','admininfo','solds','approval','brokers','users'));
     }
 
     public function properties(){

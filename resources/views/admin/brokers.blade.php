@@ -5,19 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite(['resources/css/app.css','resources/js/app.js'])
-    <title>Agents</title>
+    <title>Brokers</title>
 </head>
 <body class="bg-green-200">
     @include('message')
     @include('common.header')
 
-    <div class="px-4 pt-6">
+    <div class="px-4 pt-6">      
         <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
             <!-- Card header -->
             <div class="items-center justify-between lg:flex">
               <div class="mb-4 lg:mb-0">
-                <h3 class="mb-2 text-xl font-bold text-gray-900 dark:text-white">Agents</h3>
-                <span class="text-base font-normal text-gray-500 dark:text-gray-400">This is a list of registered Agents</span>
+                <h3 class="mb-2 text-xl font-bold text-gray-900 dark:text-white">Brokers</h3>
+                <span class="text-base font-normal text-gray-500 dark:text-gray-400">This is a list of registered Brokers</span>
               </div>
             </div>
          <!-- Table -->
@@ -29,7 +29,7 @@
                 <thead class="bg-gray-50 dark:bg-gray-700">
                   <tr>
                     <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                      Agent Name
+                      Broker Name
                     </th>
                     <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
                       Phone Number
@@ -52,38 +52,38 @@
                 </thead>
 
                 <tbody class="bg-white dark:bg-gray-800">
-                  @foreach ($agents as $agent)
+                  @foreach ($brokers as $broker)
                     <tr>
                       <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
-                        <span class="font-semibold">{{$agent->name}}</span>
+                        <span class="font-semibold">{{$broker->name}}</span>
                       </td>
                       <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
-                        {{$agent->phone_number}}
+                        {{$broker->phone_number}}
                       </td>
                       <td class="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap dark:text-white">
-                        {{$agent->address}}
+                        {{$broker->address}}
                       </td>
                       <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
-                        {{$agent->sex}}
+                        {{$broker->sex}}
                       </td>
                       <td class="inline-flex items-center p-4 space-x-2 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
-                        {{$agent->birthdate}}
+                        {{$broker->birthdate}}
                       </td>
                       <td class="p-4 whitespace-nowrap">
                         @foreach ($users as $user)
-                          @if ($agent->user_id == $user->id)
+                          @if ($broker->user_id == $user->id)
                             @php
-                              $agentemail = $user->email;
+                              $brokeremail = $user->email;
                               break;
                             @endphp
                           @endif
                         @endforeach
 
-                        {{$agentemail}}
+                        {{$brokeremail}}
                       </td>
                       <td>
                           <!-- VIEW DETAILS -->
-                          <button type="button" onclick="location.href='{{route('admin.agentprofile',$agent->id)}}';" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-0">DETAILS</button>
+                          <button type="button" onclick="location.href='{{route('admin.brokerprofile',$broker->id)}}';" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-0">DETAILS</button>
                       </td>
                     </tr>
                   @endforeach
@@ -94,7 +94,16 @@
           </div>
         </div>
       </div>
+      <div class="items-end justify-end flex mt-2">
+        <button type="button" onclick="location.href='{{route('broker.create')}}';" class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
+          <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+          Add Broker
+          </span>
+          </button>
+      </div>
+      
     </div>
+    
     </div>
 
     @include('common.footer')

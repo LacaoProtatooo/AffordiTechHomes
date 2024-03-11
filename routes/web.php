@@ -9,6 +9,7 @@ use App\Http\Controllers\AgentController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\BrokerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,19 +46,37 @@ Route::match(['get', 'post'], '/logout', [LoginController::class, 'logout'])->na
 Route::get('/register/{role}', [LoginController::class, 'signup'])->name('signup.show');
 Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('signup.submit');
 
-// Admin
+// Admin:
+// Broker Create
+// Property Create 
+// Approves Convoy and Scheduling 
+// Monitors and Approves Unit Sold
+
 //Route::middleware('admin')->group(function () {
     Route::get('/admin/dashboard', [Admincontroller::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/profile', [Admincontroller::class, 'adminprofile'])->name('admin.profile');
     Route::post('/admin/update', [Admincontroller::class, 'update'])->name('admin.update');
 
-    Route::get('/admin/agents', [Admincontroller::class, 'agents'])->name('admin.agents');
+    Route::get('/admin/brokers', [Admincontroller::class, 'brokers'])->name('admin.brokers');
     Route::get('/admin/properties', [Admincontroller::class, 'properties'])->name('admin.properties');
 
     Route::get('/admin/{id}/propertydetails', [Admincontroller::class, 'details'])->name('admin.propertydetails');
     Route::get('/admin/{id}/propertyapprove', [Admincontroller::class, 'approve'])->name('admin.approveproperty');
     Route::get('/admin/{id}/propertyreject', [Admincontroller::class, 'reject'])->name('admin.rejectproperty');
 
+    // Broker Create
+    Route::get('/register', [BrokerController::class, 'create'])->name('broker.create');
+    Route::post('/register/store', [BrokerController::class, 'register'])->name('broker.submit');
+
+    // Property Create
+    Route::get('/property/create', [PropertyController::class, 'create'])->name('property.create');
+    Route::post('/property/store', [PropertyController::class, 'store'])->name('property.store');
+    Route::get('/property/{id}/edit', [PropertyController::class, 'edit'])->name('property.edit');
+    Route::post('/property/{id}/update', [PropertyController::class, 'update'])->name('property.update');
+    Route::get('/property/{id}/delete', [PropertyController::class, 'delete'])->name('property.delete');
+
+
+    // To Be Implemented onto Broker
     Route::get('/admin/{id}/agentprofile', [Admincontroller::class, 'agentprofile'])->name('admin.agentprofile');
     Route::get('/admin/{id}/delete', [Admincontroller::class, 'delete'])->name('admin.agentdelete');
 //});
@@ -88,13 +107,6 @@ Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('s
     Route::get('/agent/profile', [AgentController::class, 'agentprofile'])->name('agent.profile');
     Route::post('/agent/update', [AgentController::class, 'update'])->name('agent.update');
 
-    // Property
-    Route::get('/property/create', [PropertyController::class, 'create'])->name('property.create');
-    Route::post('/property/store', [PropertyController::class, 'store'])->name('property.store');
-    Route::get('/property/{id}/edit', [PropertyController::class, 'edit'])->name('property.edit');
-    Route::post('/property/{id}/update', [PropertyController::class, 'update'])->name('property.update');
-    Route::get('/property/{id}/delete', [PropertyController::class, 'delete'])->name('property.delete');
-
     Route::get('/agent/soldto/{customer_id}/{property_id}', [PropertyController::class, 'soldto'])->name('agent.soldto');
     Route::post('/agent/soldtox/{customer_id}/{property_id}', [PropertyController::class, 'sold'])->name('agent.sold');
 
@@ -106,16 +118,18 @@ Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('s
 
 //});
 
+
+
 // Property Info
 Route::get('/property/info', [PropertyController::class, 'propertyinfo'])->name('property.info');
-
 Route::post('/property/search', [PropertyController::class, 'search'])->name('property.search');
 
+// Calculator
 Route::get('/calculator', function () {
     return view('resourceful.calculator');
 })->name('calculator');
 
-
+// Links
 Route::get('/resources', function () {
     return view('resourceful.resources');
 })->name('resources');
