@@ -53,6 +53,7 @@ Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('s
 // Approves Convoy and Scheduling 
 // Monitors and Approves Unit Sold
 
+// ADMIN
 //Route::middleware('admin')->group(function () {
     Route::get('/admin/dashboard', [Admincontroller::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/profile', [Admincontroller::class, 'adminprofile'])->name('admin.profile');
@@ -61,6 +62,7 @@ Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('s
     Route::get('/admin/brokers', [Admincontroller::class, 'brokers'])->name('admin.brokers');
     Route::get('/admin/{id}/brokerprofile', [Admincontroller::class, 'brokerprofile'])->name('admin.brokerprofile');
     Route::get('/admin/{id}/delete', [Admincontroller::class, 'brokerdelete'])->name('admin.brokerdelete');
+    Route::post('/admin/{id}/brokerupdate', [AdminController::class, 'brokerupdate'])->name('admin.brokerupdate');
     
     Route::get('/admin/properties', [Admincontroller::class, 'properties'])->name('admin.properties');
     Route::get('/admin/{id}/propertydetails', [Admincontroller::class, 'details'])->name('admin.propertydetails');
@@ -74,15 +76,18 @@ Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('s
     Route::post('/property/{id}/update', [PropertyController::class, 'update'])->name('property.update');
     Route::get('/property/{id}/delete', [PropertyController::class, 'delete'])->name('property.delete');
 
+//});
+
+// BROKER
+//Route::middleware('admin')->group(function () {
 
     // To Be Implemented onto Broker Middleware
     // Route::get('/admin/{id}/agentprofile', [Admincontroller::class, 'agentprofile'])->name('admin.agentprofile');
     // Route::get('/admin/{id}/delete', [Admincontroller::class, 'delete'])->name('admin.agentdelete');
 
-    
 //});
 
-// Customer
+// CUSTOMER
 //Route::middleware('customer')->group(function () {
     Route::get('/customer/dashboard', [CustomerController::class, 'index'])->name('customer.dashboard');
 
@@ -98,7 +103,7 @@ Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('s
     Route::get('/schedule/customerschedule/{id}', [ScheduleController::class, 'CustomerScheduleStore'])->name('customer.schedule');
 //});
 
-// Agent
+// AGENT
 //Route::middleware('agent')->group(function () {
     Route::get('/agent/dashboard', [AgentController::class, 'index'])->name('agent.dashboard');
     Route::get('/agent/view/Appointment', [AgentController::class, 'appointment'])->name('agent.appointment');

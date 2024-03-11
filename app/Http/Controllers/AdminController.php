@@ -170,10 +170,32 @@ class AdminController extends Controller
     }
 
     public function brokerdelete($id){
-        Broker::destroy($id);
+        $userinfo = Broker::find($id);
+
+        User::destroy($userinfo->user_id);
 
         return redirect()->route('admin.dashboard');
     }
+
+    public function brokerupdate(Request $request, $id){
+        $brokerinfo = Broker::where('id', $id)->first();
+
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'phone_number' => 'required|max:11',
+            'address' => 'required|string|max:255',
+        ]);
+
+        $brokerinfo->name = $validatedData['name'];
+        $brokerinfo->phone_number = $validatedData['phone_number'];
+        $brokerinfo->address = $validatedData['address'];
+
+        $brokerinfo->save();
+
+        return redirect()->route('admin.dashboard');
+    }
+
+    
 
     public function details($id){
         $propertyinfo = Property::find($id);
