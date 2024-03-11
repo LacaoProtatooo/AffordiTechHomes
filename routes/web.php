@@ -80,10 +80,15 @@ Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('s
 
 // BROKER
 //Route::middleware('admin')->group(function () {
+    Route::get('/broker/dashboard', [BrokerController::class, 'index'])->name('broker.dashboard');
+    Route::get('/broker/profile', [BrokerController::class, 'brokerprofile'])->name('broker.profile');
+    Route::post('/broker/update', [BrokerController::class, 'update'])->name('broker.update');
 
     // To Be Implemented onto Broker Middleware
     // Route::get('/admin/{id}/agentprofile', [Admincontroller::class, 'agentprofile'])->name('admin.agentprofile');
     // Route::get('/admin/{id}/delete', [Admincontroller::class, 'delete'])->name('admin.agentdelete');
+  
+
 
 //});
 
@@ -131,10 +136,7 @@ Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('s
 
 //});
 
-//broker
-Route::get('/broker/dashboard', [BrokerController::class, 'index'])->name('broker.dashboard');
-Route::get('/broker/profile', [BrokerController::class, 'brokerprofile'])->name('broker.profile');
-Route::post('/broker/update', [BrokerController::class, 'update'])->name('broker.update');
+
 
 
 // Property Info

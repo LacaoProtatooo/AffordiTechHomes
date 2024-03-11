@@ -5,14 +5,15 @@ use App\Models\Admin;
 use Carbon\Carbon;
 $currentUser = Auth::user();
 
-
 $customerinfo = null;
+$brokerinfo = null;
 $agentinfo = null;
 $admininfo = null;
 
 if ($currentUser) {
     $customerinfo = Customer::where('user_id', $currentUser->id)->first();
     $agentinfo = Agent::where('user_id', $currentUser->id)->first();
+    $brokerinfo = Broker::where('user_id', $currentUser->id)->first();
     $admininfo = Admin::where('user_id', $currentUser->id)->first();
 }
 
