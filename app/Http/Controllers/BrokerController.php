@@ -16,9 +16,7 @@ class BrokerController extends Controller
         return view('broker.index',compact('brokerinfo'));
     }
 
-    public function create(){
-        return view('admin.brokercreate');
-    }
+    
 
     public function brokerprofile(){
         $user = auth()->user();
@@ -69,8 +67,6 @@ class BrokerController extends Controller
             'sex' => 'required|string|in:male,female',
             'birthdate' => 'required|date',
         ]);
-
-        dd($validatedData);
 
         $birthdate = date('Y-m-d', strtotime($request->birthdate));
 

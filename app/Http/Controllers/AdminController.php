@@ -162,8 +162,15 @@ class AdminController extends Controller
         return View('admin.agentdetails', compact('agentinfo','userinfo'));
     }
 
-    public function delete($id){
-        Agent::destroy($id);
+    public function brokerprofile($id){
+        $brokerrinfo = Broker::find($id);
+        $userinfo = User::find($brokerrinfo->user_id);
+
+        return View('admin.brokerdetails', compact('brokerrinfo','userinfo'));
+    }
+
+    public function brokerdelete($id){
+        Broker::destroy($id);
 
         return redirect()->route('admin.dashboard');
     }

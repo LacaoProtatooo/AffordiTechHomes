@@ -10,7 +10,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\BrokerController;
 use App\Http\Controllers\ScheduleController;
-use App\Http\Controllers\BrokerController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -59,15 +59,13 @@ Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('s
     Route::post('/admin/update', [Admincontroller::class, 'update'])->name('admin.update');
 
     Route::get('/admin/brokers', [Admincontroller::class, 'brokers'])->name('admin.brokers');
+    Route::get('/admin/{id}/brokerprofile', [Admincontroller::class, 'brokerprofile'])->name('admin.brokerprofile');
+    Route::get('/admin/{id}/delete', [Admincontroller::class, 'brokerdelete'])->name('admin.brokerdelete');
+    
     Route::get('/admin/properties', [Admincontroller::class, 'properties'])->name('admin.properties');
-
     Route::get('/admin/{id}/propertydetails', [Admincontroller::class, 'details'])->name('admin.propertydetails');
     Route::get('/admin/{id}/propertyapprove', [Admincontroller::class, 'approve'])->name('admin.approveproperty');
     Route::get('/admin/{id}/propertyreject', [Admincontroller::class, 'reject'])->name('admin.rejectproperty');
-
-    // Broker Create
-    Route::get('/register', [BrokerController::class, 'create'])->name('broker.create');
-    Route::post('/register/store', [BrokerController::class, 'register'])->name('broker.submit');
 
     // Property Create
     Route::get('/property/create', [PropertyController::class, 'create'])->name('property.create');
@@ -77,9 +75,11 @@ Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('s
     Route::get('/property/{id}/delete', [PropertyController::class, 'delete'])->name('property.delete');
 
 
-    // To Be Implemented onto Broker
-    Route::get('/admin/{id}/agentprofile', [Admincontroller::class, 'agentprofile'])->name('admin.agentprofile');
-    Route::get('/admin/{id}/delete', [Admincontroller::class, 'delete'])->name('admin.agentdelete');
+    // To Be Implemented onto Broker Middleware
+    // Route::get('/admin/{id}/agentprofile', [Admincontroller::class, 'agentprofile'])->name('admin.agentprofile');
+    // Route::get('/admin/{id}/delete', [Admincontroller::class, 'delete'])->name('admin.agentdelete');
+
+    
 //});
 
 // Customer
