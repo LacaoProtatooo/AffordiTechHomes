@@ -7,6 +7,7 @@ use App\Models\Agent;
 use App\Models\Customer;
 use App\Models\Property;
 use App\Models\Schedules;
+use App\Models\Broker;
 use App\Models\Customer_schedule;
 use App\Models\Inquire;
 use App\Models\Approval;
@@ -77,9 +78,10 @@ class AgentController extends Controller
             'sex' => 'required|string|in:male,female',
             'birthdate' => 'required|date',
         ]);
+        $user = auth()->user();
+        $broker = Broker::where('user_id', $user->id)->first();
 
         $birthdate = date('Y-m-d', strtotime($request->birthdate));
-
         $user = new user();
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
@@ -87,6 +89,7 @@ class AgentController extends Controller
 
         $agent = new Agent();
         $agent->user_id = $user->id;
+        $agent->broker_id = $broker->id;
         $agent->name = $request->name;
         $agent->phone_number = $request->phone_number;
         $agent->address = $request->address;
@@ -95,7 +98,7 @@ class AgentController extends Controller
         $agent->save();
         //auth()->login($user);
 
-        return redirect()->route('login.loginpage')->with('successregister', true);
+        return redirect()->route('broker.dashboard')->with('successregister', true);
     }
 
     public function inquiry()
