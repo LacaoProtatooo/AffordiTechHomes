@@ -56,6 +56,7 @@ class LoginController extends Controller
             $customerinfo = Customer::where('user_id', $user->id)->first();
             $agentinfo = Agent::where('user_id', $user->id)->first();
             $admininfo = Admin::where('user_id', $user->id)->first();
+            $brokerinfo = Broker::where('user_id', $user->id)->first();
             
             if($customerinfo)
             {
@@ -69,6 +70,10 @@ class LoginController extends Controller
             elseif($admininfo)
             {
                 return redirect()->route('admin.dashboard');
+            }
+            elseif($brokerinfo)
+            {
+                return redirect()->route('broker.dashboard');
             }
             else{
                 dd('error');
