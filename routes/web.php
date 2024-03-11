@@ -8,6 +8,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\BrokerController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\BrokerController;
 /*
@@ -107,6 +108,13 @@ Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('s
     Route::get('/agent/profile', [AgentController::class, 'agentprofile'])->name('agent.profile');
     Route::post('/agent/update', [AgentController::class, 'update'])->name('agent.update');
 
+    // Property
+    Route::get('/property/create', [PropertyController::class, 'create'])->name('property.create');
+    Route::post('/property/store', [PropertyController::class, 'store'])->name('property.store');
+    Route::get('/property/{id}/edit', [PropertyController::class, 'edit'])->name('property.edit');
+    Route::post('/property/{id}/update', [PropertyController::class, 'update'])->name('property.update');
+    Route::get('/property/{id}/delete', [PropertyController::class, 'delete'])->name('property.delete');
+
     Route::get('/agent/soldto/{customer_id}/{property_id}', [PropertyController::class, 'soldto'])->name('agent.soldto');
     Route::post('/agent/soldtox/{customer_id}/{property_id}', [PropertyController::class, 'sold'])->name('agent.sold');
 
@@ -117,8 +125,6 @@ Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('s
     });
 
 //});
-
-
 
 // Property Info
 Route::get('/property/info', [PropertyController::class, 'propertyinfo'])->name('property.info');

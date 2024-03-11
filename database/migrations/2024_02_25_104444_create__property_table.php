@@ -18,12 +18,12 @@ return new class extends Migration
             $table->decimal('price', 12, 2);
             $table->string('address');
             $table->string('property_type');
-            $table->string('block');
-            $table->string('unit');
             $table->string('description');
             $table->string('rooms');
             $table->integer('sqm');
             $table->string('cr');
+            $table->string('block');
+            $table->string('unit');
             $table->string('status');
             $table->longText('image_path')->nullable();
             $table->timestamps(); 

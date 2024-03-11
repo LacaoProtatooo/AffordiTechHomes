@@ -154,17 +154,7 @@
                           {{$property->price}}
                         </td>
                         <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
-                          @foreach ($agents as $agent)
-                            @if ($agent->id == $property->agent_id)
-                              @php
-                                  $agentname = $agent->name;
-                                  break;
-                              @endphp
-                            @endif
-                          @endforeach
-
-                          {{$agentname}}
-                          
+                          {{-- para to sa agent seler na nakabenta sa property inalis ko lang dahil nag eerror --}}
                         </td>
                         <td class="inline-flex items-center p-4 space-x-2 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
                           @php

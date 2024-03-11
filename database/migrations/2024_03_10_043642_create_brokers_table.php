@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('agents', function (Blueprint $table) {
+        Schema::create('brokers', function (Blueprint $table) {
             $table->id()->autoIncrement();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('broker_id');
             $table->string('name');
             $table->string('phone_number');
             $table->string('address');
@@ -24,7 +23,6 @@ return new class extends Migration
 
             // FK
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('broker_id')->references('id')->on('brokers')->onDelete('cascade');
         });
     }
 
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('agents');
+        Schema::dropIfExists('brokers');
     }
 };
