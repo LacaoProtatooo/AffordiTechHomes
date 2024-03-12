@@ -36,7 +36,7 @@
         <div class="col-span-2">
             <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
                 <h3 class="mb-4 text-xl font-semibold dark:text-white">General information</h3>
-                <form action="{{route('agent.update')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{route('broker.agentupdate', $agentinfo->id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
                     <div class="grid grid-cols-6 gap-6">
                         <div class="col-span-6 sm:col-span-3">
