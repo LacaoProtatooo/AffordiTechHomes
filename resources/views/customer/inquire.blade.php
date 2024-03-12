@@ -25,21 +25,38 @@
             <tr>
               <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Property ID</th>
               <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Address</th>
+              <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Broker Name</th>
+              <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Broker Contact</th>
               <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Agent Name</th>
               <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Agent Contact</th>
               <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Cancel</th>
             </tr>
           </thead>
           <tbody class="text-gray-700">
-            @foreach ($inquiries as $inquire)
+            @foreach ($inquires as $inquire)
             <tr>
                 <td class="py-3 px-4">{{ $inquire->property_id }}</td>
-                <td class="py-3 px-4">{{ $inquire->address }}</td>
-                <td class="py-3 px-4">{{ $inquire->agent_name }}</td>
-                <td class="py-3 px-4">{{ $inquire->agent_phone_number }}</td>
+                <td class="py-3 px-4">{{ $inquire->property_address }}</td>
+                <td class="py-3 px-4">{{ $inquire->broker_name }}</td>
+                <td class="py-3 px-4">{{ $inquire->broker_contact }}</td>
+                <td class="py-3 px-4">
+                  @if ($inquire->agent_name)
+                      {{$inquire->agent_name}}
+                  @else
+                      No Agent Assign Yet
+                  @endif
+                </td>
+                <td class="py-3 px-4">
+                  @if ( $inquire->agent_contact )
+                  {{ $inquire->agent_contact }}
+                  @else
+                    No Agent Assign Yet
+                  @endif
+                </td>
                 <td class="py-3 px-4">
                     <a href="{{ route('inquire.delete', ['customer_id' =>$customer->id, 'property_id' => $inquire->property_id]) }}" class="text-blue-500 hover:underline">Remove</a>
-                </tr>
+                </td>
+            </tr>
             @endforeach
           </tbody>
         </table>
