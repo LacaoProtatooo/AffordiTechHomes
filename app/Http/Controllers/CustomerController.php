@@ -85,15 +85,17 @@ class CustomerController extends Controller
     {
     $user = auth()->user();
     $customer = Customer::where('user_id', $user->id)->first();
-    
-    $inquiries = Inquire::where('customer_id', $customer->id)
-    ->join('properties', 'inquiries.property_id', '=', 'properties.id')
-    ->join('agents', 'properties.agent_id', '=', 'agents.id')
-    ->where('properties.status', 'available') // Add this condition
-    ->select('inquiries.*', 'properties.address', 'agents.name as agent_name', 'agents.phone_number as agent_phone_number')
+
+    $inquires = DB::table('inquiries as i')
+    ->join('customers as c', 'i.customer_id', '=', 'c.id')
+    ->join('brokers as b', 'i.broker_id', '=', 'b.id')
+    ->leftJoin('agents as a', 'i.agent_id', '=', 'a.id')
+    ->join('properties as p', 'i.property_id', '=', 'p.id')
+    ->where('i.customer_id', $customer->id)
+    ->select('i.*', 'c.*', 'b.name as broker_name', 'b.phone_number as broker_contact', 'a.name as agent_name', 'a.phone_number as agent_contact', 'p.address as property_address')
     ->get();
 
-    return view('customer.inquire', compact('inquiries', 'customer'));
+    return view('customer.inquire', compact('customer','inquires'));
     }
 
     public function inquire($id)
