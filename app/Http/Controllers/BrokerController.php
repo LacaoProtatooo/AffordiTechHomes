@@ -143,6 +143,8 @@ class BrokerController extends Controller
         $Broker->birthdate = $birthdate; 
         $Broker->save();
 
+        //$brokerproperty = new 
+
         return redirect()->route('admin.dashboard')->with('successregister', true);
     }
 }
