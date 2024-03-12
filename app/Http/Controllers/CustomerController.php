@@ -20,12 +20,7 @@ class CustomerController extends Controller
     {
         $user = auth()->user();
         $customerinfo = Customer::where('user_id', $user->id)->first();
-
-        $properties = Property::join('approvals', 'properties.id', '=', 'approvals.property_id')
-        ->where('approvals.status_of_approval', 'approved')
-        ->where('properties.status','available')
-        ->select('properties.*') 
-        ->get();
+        $properties = Property::All();
         return view('customer.index', compact('properties','customerinfo'));
     }
 
