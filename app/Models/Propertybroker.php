@@ -12,5 +12,7 @@ class Propertybroker extends Model
     protected $fillable = [
         'property_id',
         'customer_id', 
+        'created_at',
+        'updated_at',
     ];
 }

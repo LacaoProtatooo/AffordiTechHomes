@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Broker;
+use App\Models\Propertybroker;
 use App\Models\User;
 use App\Models\Agent;
 use App\Models\Inquire;
@@ -143,7 +144,11 @@ class BrokerController extends Controller
         $Broker->birthdate = $birthdate; 
         $Broker->save();
 
-        //$brokerproperty = new 
+        $brokerproperty = new Propertybroker();
+        $selectbroker = Broker::where('user_id', $user->id)->first();
+        $brokerproperty->property_id = $request->property;
+        $brokerproperty->broker_id = $selectbroker->id;
+        $brokerproperty->save();
 
         return redirect()->route('admin.dashboard')->with('successregister', true);
     }
