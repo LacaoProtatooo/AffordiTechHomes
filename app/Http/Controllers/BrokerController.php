@@ -17,14 +17,52 @@ class BrokerController extends Controller
         return view('broker.index',compact('brokerinfo'));
     }
 
+    public function agentprofile($id){
+        $agentinfo = Agent::find($id);
+        $userinfo = User::find($agentinfo->user_id);
+
+        return View('agent.agentprofile', compact('agentinfo','userinfo'));
+    }
+
     public function brokerprofile(){
         $user = auth()->user();
         $brokerinfo = Broker::where('user_id', $user->id)->first();
         $userinfo = User::where('id', $brokerinfo->user_id)->first();
 
-        return view('broker.brokerprofile', compact('brokerinfo','userinfo'));
+        $allbroker = Broker::All();
+
+        return view('broker.brokerprofile', compact('brokerinfo','allbroker','userinfo'));
     }
 
+    public function agent()
+    {
+        $user = Auth::user();
+        $brokerinfo = Broker::where('user_id', $user->id)->first();
+        $agents = Agent::where('broker_id',$brokerinfo->id)->get();
+        $users = User::All();
+        return view('broker.agent',compact('agents','users'));
+    }
+
+
+    public function agentupdate(Request $request, $id){
+        $agentinfo = Agent::where('id', $id)->first();
+
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'phone_number' => 'required|max:11',
+            'address' => 'required|string|max:255',
+        ]);
+
+        $agentinfo->name = $validatedData['name'];
+        $agentinfo->phone_number = $validatedData['phone_number'];
+        $agentinfo->address = $validatedData['address'];
+
+        $agentinfo->save();
+
+        return redirect()->route('broker.dashboard');
+    }
+
+    
     public function update(Request $request){
         $user = Auth::user();
         $brokerinfo = Broker::where('user_id', $user->id)->first();
