@@ -57,11 +57,9 @@
                 <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Property Type: {{$property->property_type}}</p><br>
                 <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Bedrooms: {{$property->rooms}}</p><br>
                 <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Comfort Rooms: {{$property->cr}}</p><br>
-                <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Parkings: {{$property->parking}}</p><br>
                 <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Property Area: {{$property->sqm}}</p><br>
                 <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Property Price: {{$property->price}}</p><br>
                 <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Property Address: {{$property->address}}</p><br>
-                <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Agent: {{$agentinfo->name}}</p><br>
             </div>
 
         </div>
@@ -73,39 +71,6 @@
 
             @endif
         </div>
-        
-    {{--Table for appointment--}}
-    <br>
-    </div>
-    
-    <div class="rounded-lg ml-4 mr-4 overflow-x-auto mt-8 justify-center mb-20"> <!-- Add margin top for separation -->
-        <h2 class="text-2xl font-semibold mb-4">Schedule Available for Visit</h2> <!-- Added h2 heading -->
-        <table class="min-w-full bg-white items-center justify-center">
-          <thead class="bg-gray-100">
-            <tr>
-              <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Date</th>
-              <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Time</th>
-              <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Availability</th>
-            </tr>
-          </thead>
-          <tbody class="text-gray-700">
-            @foreach ($schedules as $schedule)
-            <tr>
-                <td class="py-3 px-4">
-                    {{ \Carbon\Carbon::parse($schedule->time_schedule)->toDateString() }}
-                </td>
-                <td class="py-3 px-4">
-                    {{ \Carbon\Carbon::parse($schedule->time_schedule)->format('h:i A') }}
-                </td>
-                <td class="py-3 px-4">
-                  <a href="{{route('customer.schedule',$schedule->id)}}" class="text-blue-500 hover:underline">Inquire</a>
-              </td>
-              </tr>
-            @endforeach
-          </tbody>
-        </table>
-      </div>
-
     <script>
         function confirmInquiry(inquiryUrl) {
             // Display confirmation dialog
