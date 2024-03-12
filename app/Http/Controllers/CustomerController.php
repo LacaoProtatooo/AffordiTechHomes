@@ -9,6 +9,7 @@ use App\Models\Schedules;
 use App\Models\Customer_schedule;
 use App\Models\Inquire;
 use App\Models\Approval;
+use App\Models\Propertybroker;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -98,9 +99,9 @@ class CustomerController extends Controller
     public function inquire($id)
     {
         $user = auth()->user();
-        $property = Property::where('id',$id)->first();
-        dd($property);
         $customer = Customer::where('user_id', $user->id)->first();
+        $property = Propertybroker::where('property_id',$id)->first();
+        
         $existingInquiry = Inquire::where('customer_id', $customer->id)
                                     ->where('property_id', $id)
                                     ->exists();
@@ -112,7 +113,7 @@ class CustomerController extends Controller
         DB::table('inquiries')->insert([
             'customer_id' => $customer->id,
             'property_id' => $id,
-            'broker_id' => now(),
+            'broker_id' => $property->broker_id,
         ]);
 
         return redirect()->route('customer.dashboard')->with('success', 'Inquiry submitted successfully!');
