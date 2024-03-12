@@ -15,7 +15,7 @@
     <br><br>
     <section class="bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-            <a href="{{route('home')}}" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white hover:text-white ">
+            <a href="{{route('welcome')}}" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white hover:text-white ">
                 <img class="w-32 h-32 mr-2 bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-1 py-1 text-center me-2 mb-0" src="{{ asset('storage/Logo_BG_Removed.png')}} " alt="logo">
                 AfforfiTech Homes    
             </a>
