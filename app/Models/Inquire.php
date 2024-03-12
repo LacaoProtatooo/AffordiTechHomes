@@ -12,7 +12,7 @@ class Inquire extends Model
     protected $fillable = [
         'property_id',
         'customer_id',
-        'date_inquire',
+        'broker_id',
         
     ];
 }
