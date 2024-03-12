@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Broker;
 use App\Models\Propertybroker;
+use App\Models\Customer;
 use App\Models\User;
 use App\Models\Agent;
 use App\Models\Inquire;
@@ -42,19 +43,22 @@ class BrokerController extends Controller
     {
         $user = auth()->user();
         $broker = Broker::where('user_id', $user->id)->first();
-        
-        $inquiries = Inquire::join('properties', 'inquiries.property_id', '=', 'properties.id')
+ 
+        $inquiries = Inquire::
+        join('property_has_broker as phb_property_id', 'inquiries.property_id', '=', 'phb_property_id.property_id')
+        ->join('properties as pph','phb_property_id.property_id','=','pph.id')
         ->join('customers', 'inquiries.customer_id', '=', 'customers.id')
-        ->join('properties','property_has_broker.property_id','=', 'properties.id')
-        ->join('brokers','property_has_broker.broker_id','=', 'broker.id')
-        ->join('property_has_broker', 'inquiries.broker_id', '=', 'property_has_broker.id')
-        ->where('brokers.id', $broker->id)
-        ->where('properties.status', 'available')
-        ->select('inquiries.*', 'properties.address', 'customers.name as customer_name', 'customers.phone_number as customer_phone_number')
-        ->orderBy('inquiries.property_id', 'asc')
+        ->leftJoin('agents', 'inquiries.agent_id', '=', 'agents.id')
+        ->join('property_has_broker as phb_broker_id', 'inquiries.broker_id', '=', 'phb_broker_id.broker_id')
+        ->where('phb_broker_id.broker_id', $broker->id)
+        ->where('pph.status', 'available')
         ->get();
 
-        return view('broker.inquire', compact('inquiries', 'broker'));
+        foreach( $inquiries as $inquiry ){
+            $customers = Customer::where('id', $inquiry->customer_id)->get();
+        }
+        
+        return view('broker.inquire', compact('inquiries','broker','customers'));
     }
 
     public function agent()

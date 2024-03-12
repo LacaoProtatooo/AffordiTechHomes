@@ -197,8 +197,6 @@ class AdminController extends Controller
         return redirect()->route('admin.dashboard');
     }
 
-    
-
     public function details($id){
         $propertyinfo = Property::find($id);
         $agentinfo = Agent::where('id', $propertyinfo->agent_id)->first();

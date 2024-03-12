@@ -13,6 +13,9 @@
 <body class="bg-green-200 ">
     @include('message')
     @include('common.header')
+    @php
+      //dd($inquiries);
+    @endphp
 
     {{--Table for appointment--}}
     <br>
@@ -24,19 +27,27 @@
           <thead class="bg-gray-100">
             <tr>
               <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Property ID</th>
+              <th class="text-left py-3 px-4 uppercase font-semibold text-sm"></th>
               <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Address</th>
               <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Customer Name</th>
               <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Customer Contact</th>
-              <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Buy</th>
+              <th class="text-left py-3 px-4 uppercase font-semibold text-sm"></th>
             </tr>
           </thead>
           <tbody class="text-gray-700">
-            @foreach ($inquires as $inquire)
+            @foreach ($inquiries as $inquire)
             <tr>
             <td class="py-3 px-4">{{ $inquire->property_id }}</td>
-            <td class="py-3 px-4">{{ $inquire->property_address }}</td>
-            <td class="py-3 px-4">{{ $inquire->customer_name }}</td>
-            <td class="py-3 px-4">{{ $inquire->customer_phone_number }}</td>
+            
+            @foreach ($customers as $customer)
+              @if ($customer->id == $inquire->customer_id)
+                <td class="py-3 px-4">{{ $customer->address }}</td>
+                <td class="py-3 px-4">{{ $customer->name }}</td>
+                <td class="py-3 px-4">{{ $customer->phone_number }}</td>
+              @endif
+            @endforeach
+            
+            
             <td class="py-3 px-4">
               {{-- <a href="{{ route('broker.soldto', ['property_id' =>$inquire->property_id, 'customer_id' =>$inquire->customer_id]) }}" class="text-blue-500 hover:underline">Sold</a> --}}
             </tr>
