@@ -83,6 +83,10 @@ Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('s
     Route::get('/broker/dashboard', [BrokerController::class, 'index'])->name('broker.dashboard');
     Route::get('/broker/profile', [BrokerController::class, 'brokerprofile'])->name('broker.profile');
     Route::post('/broker/update', [BrokerController::class, 'update'])->name('broker.update');
+    Route::get('/broker/agent', [BrokerController::class, 'agent'])->name('broker.agent');
+
+    Route::get('/broker/{id}/agentprofile', [BrokerController::class, 'agentprofile'])->name('broker.agentprofile');
+    Route::post('/broker/{id}/agentupdate', [BrokerController::class, 'agentupdate'])->name('broker.agentupdate');
 
     // To Be Implemented onto Broker Middleware
     // Route::get('/admin/{id}/agentprofile', [Admincontroller::class, 'agentprofile'])->name('admin.agentprofile');
