@@ -79,7 +79,7 @@ Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('s
 //});
 
 // BROKER
-//Route::middleware('admin')->group(function () {
+//Route::middleware('broker')->group(function () {
     Route::get('/broker/dashboard', [BrokerController::class, 'index'])->name('broker.dashboard');
     Route::get('/broker/profile', [BrokerController::class, 'brokerprofile'])->name('broker.profile');
     Route::post('/broker/update', [BrokerController::class, 'update'])->name('broker.update');
@@ -87,6 +87,10 @@ Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('s
 
     Route::get('/broker/{id}/agentprofile', [BrokerController::class, 'agentprofile'])->name('broker.agentprofile');
     Route::post('/broker/{id}/agentupdate', [BrokerController::class, 'agentupdate'])->name('broker.agentupdate');
+
+    Route::get('/broker/view/inquiry', [BrokerController::class, 'inquiry'])->name('broker.inquiry');
+    // Route::get('/agent/soldto/{customer_id}/{property_id}', [PropertyController::class, 'soldto'])->name('agent.soldto');
+    // Route::post('/agent/soldtox/{customer_id}/{property_id}', [PropertyController::class, 'sold'])->name('agent.sold');
 
     // To Be Implemented onto Broker Middleware
     // Route::get('/admin/{id}/agentprofile', [Admincontroller::class, 'agentprofile'])->name('admin.agentprofile');

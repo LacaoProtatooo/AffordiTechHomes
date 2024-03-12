@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Broker;
 use App\Models\User;
 use App\Models\Agent;
+use App\Models\Inquire;
 use App\Models\Property;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -34,6 +35,25 @@ class BrokerController extends Controller
         $allbroker = Broker::All();
 
         return view('broker.brokerprofile', compact('brokerinfo','allbroker','userinfo'));
+    }
+
+    public function inquiry()
+    {
+        $user = auth()->user();
+        $broker = Broker::where('user_id', $user->id)->first();
+        
+        $inquiries = Inquire::join('properties', 'inquiries.property_id', '=', 'properties.id')
+        ->join('customers', 'inquiries.customer_id', '=', 'customers.id')
+        ->join('properties','property_has_broker.property_id','=', 'properties.id')
+        ->join('brokers','property_has_broker.broker_id','=', 'broker.id')
+        ->join('property_has_broker', 'inquiries.broker_id', '=', 'property_has_broker.id')
+        ->where('brokers.id', $broker->id)
+        ->where('properties.status', 'available')
+        ->select('inquiries.*', 'properties.address', 'customers.name as customer_name', 'customers.phone_number as customer_phone_number')
+        ->orderBy('inquiries.property_id', 'asc')
+        ->get();
+
+        return view('broker.inquire', compact('inquiries', 'broker'));
     }
 
     public function agent()

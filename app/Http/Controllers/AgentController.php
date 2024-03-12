@@ -8,9 +8,7 @@ use App\Models\Customer;
 use App\Models\Property;
 use App\Models\Schedules;
 use App\Models\Broker;
-use App\Models\Customer_schedule;
 use App\Models\Inquire;
-use App\Models\Approval;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;

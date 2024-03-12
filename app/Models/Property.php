@@ -11,7 +11,7 @@ class Property extends Model
     protected $table = 'properties';
     protected $fillable = [
         'id',
-        'agent_id',
+        'admin_id',
         'developer',
         'price',
         'address',

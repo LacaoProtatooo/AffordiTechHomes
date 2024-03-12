@@ -38,7 +38,7 @@
             <td class="py-3 px-4">{{ $inquire->customer_name }}</td>
             <td class="py-3 px-4">{{ $inquire->customer_phone_number }}</td>
             <td class="py-3 px-4">
-              <a href="{{ route('agent.soldto', ['property_id' =>$inquire->property_id, 'customer_id' =>$inquire->customer_id]) }}" class="text-blue-500 hover:underline">Sold</a>
+              {{-- <a href="{{ route('broker.soldto', ['property_id' =>$inquire->property_id, 'customer_id' =>$inquire->customer_id]) }}" class="text-blue-500 hover:underline">Sold</a> --}}
             </tr>
             </tr> 
             @endforeach
