@@ -5,15 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Inquire extends Model
+class Propertybroker extends Model
 {
     use HasFactory;
-    protected $table = 'inquiries';
+    protected $table = 'property_has_broker';
     protected $fillable = [
         'property_id',
-        'customer_id',
-        'broker_id',
-        'agent_id',
-        
+        'customer_id', 
     ];
 }
