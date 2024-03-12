@@ -215,10 +215,6 @@ class PropertyController extends Controller
             $properties->where('address', 'like', '%' . $location . '%');
         }
 
-        if ($parking) {
-            $properties->where('parking', $parking);
-        }
-
         if ($status) {
             $properties->where('status', $status);
         }
