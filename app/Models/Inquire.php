@@ -13,6 +13,7 @@ class Inquire extends Model
         'property_id',
         'customer_id',
         'broker_id',
+        'agent_id',
         
     ];
 }
