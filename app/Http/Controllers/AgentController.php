@@ -55,16 +55,8 @@ class AgentController extends Controller
 
     // Index
     public function index()
-    {
-        $user = auth()->user();
-        if($user != NULL){
-            $agentinfo = Agent::where('user_id', $user->id)->first();
-        }
-        $properties = Property::where('agent_id', $agentinfo->id)
-        ->leftJoin('approvals', 'properties.id', '=', 'approvals.property_id')
-        ->select('properties.*', 'approvals.status_of_approval')
-        ->get();
-        return view('agent.index',compact('properties','agentinfo'));
+    {  
+        return view('agent.index');
     }
 
     // Register
