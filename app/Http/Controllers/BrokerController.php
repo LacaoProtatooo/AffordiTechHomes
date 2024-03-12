@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Broker;
 use App\Models\User;
 use App\Models\Agent;
+use App\Models\Property;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +15,8 @@ class BrokerController extends Controller
     {
         $user = auth()->user();
         $brokerinfo = Broker::where('user_id', $user->id)->first();
-        return view('broker.index',compact('brokerinfo'));
+        $properties = Property::All();
+        return view('broker.index',compact('brokerinfo','properties'));
     }
 
     public function agentprofile($id){
