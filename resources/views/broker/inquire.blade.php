@@ -31,10 +31,10 @@
             </tr>
           </thead>
           <tbody class="text-gray-700">
-            @foreach ($inquiries as $inquire)
+            @foreach ($inquires as $inquire)
             <tr>
             <td class="py-3 px-4">{{ $inquire->property_id }}</td>
-            <td class="py-3 px-4">{{ $inquire->address }}</td>
+            <td class="py-3 px-4">{{ $inquire->property_address }}</td>
             <td class="py-3 px-4">{{ $inquire->customer_name }}</td>
             <td class="py-3 px-4">{{ $inquire->customer_phone_number }}</td>
             <td class="py-3 px-4">
