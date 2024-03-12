@@ -54,7 +54,10 @@
         <div class="grid md:grid-cols-2 md:gap-2">
             <div class="mb-1">
                 <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Property Description: {{$property->description}}</p><br>
+                <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Property Developer: {{$property->developer}}</p><br>
                 <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Property Type: {{$property->property_type}}</p><br>
+                <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Property Unit: {{$property->unit}}</p><br>
+                <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Property Block: {{$property->block}}</p><br>
                 <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Bedrooms: {{$property->rooms}}</p><br>
                 <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Comfort Rooms: {{$property->cr}}</p><br>
                 <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Property Area: {{$property->sqm}}</p><br>
