@@ -81,15 +81,8 @@ class PropertyController extends Controller
     public function propertyinfo(Request $request){
         $id = $request->query('id');
         $property = Property::where('id', $id)->first();
-        $agentinfo = Agent::where('id', $property->agent_id)->first();
-        $schedules = Schedules::where('property_id', $id)
-                                ->whereNotExists(function ($query) {
-                                        $query->select(DB::raw(1))
-                                        ->from('customer_schedules')
-                                        ->whereColumn('customer_schedules.schedule_id', 'schedules.id');
-                                })->get();
 
-        return view('customer.propertyinfo', compact('property', 'agentinfo','schedules'));
+        return view('customer.propertyinfo', compact('property'));
     }
 
     public function create(){
