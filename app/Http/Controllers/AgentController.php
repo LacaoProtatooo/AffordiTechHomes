@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Models\Agent;
 use App\Models\Customer;
 use App\Models\Property;
-use App\Models\Schedules;
+use App\Models\Visit;
 use App\Models\Broker;
 use App\Models\Inquire;
 
@@ -23,17 +23,15 @@ class AgentController extends Controller
         $user = auth()->user();
         $agent = Agent::where('user_id', $user->id)->first();
 
-        $schedules = Schedules::leftJoin('customer_schedules', 'schedules.id', '=', 'customer_schedules.schedule_id')
-        ->leftJoin('customers', 'customer_schedules.customer_id', '=', 'customers.id')
-        ->leftJoin('agents', 'schedules.agent_id', '=', 'agents.id')
-        ->leftJoin('properties', 'schedules.property_id', '=', 'properties.id')
+        $schedules = Visit::leftJoin('customers', 'visits.customer_id', '=', 'customers.id')
+        ->leftJoin('agents', 'visits.agent_id', '=', 'agents.id')
+        ->leftJoin('properties', 'visits.property_id', '=', 'properties.id')
         ->where('agents.id', $agent->id)
-        ->select('schedules.*', 'customers.name', 'customers.phone_number')
-        ->orderBy('schedules.property_id', 'asc')
+        ->where('visits.approval_status', 'pending')
+        ->orderBy('visits.property_id', 'asc')
         ->get();
 
-
-        return view('agent.appointment',compact('schedules'));
+        return view('agent.appointment', compact('schedules'));
     }
 
     // Transaction

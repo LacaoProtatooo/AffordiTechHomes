@@ -10,9 +10,8 @@ use App\Models\Agent;
 use App\Models\Customer;
 use App\Models\User;
 use App\Models\Property;
-use App\Models\Schedules;
 use App\Models\Customer_schedule;
-use App\Models\Approval;
+use App\Models\Visit;
 class ScheduleController extends Controller
 {
     public function CustomerScheduleStore($id)
@@ -27,54 +26,47 @@ class ScheduleController extends Controller
         
     }
 
-    public function create()
+    public function create($property_id, $customer_id)
     {
         $user = auth()->user();
         $agentinfo = Agent::where('user_id', $user->id)->first();
-    
-    $properties = DB::table('properties')
-        ->join('agents', 'properties.agent_id', '=', 'agents.id')
-        ->leftJoin('approvals', 'properties.id', '=', 'approvals.property_id')
-        ->select('properties.*', 'agents.id as agent_id', 'agents.name as agent_name', 'approvals.status_of_approval as approval_status')
-        ->where('properties.agent_id', $agentinfo->id)
-        ->where('approvals.status_of_approval', 'approved')
-        ->get();
-       /* $propertyid = DB::table('properties')
-        ->select('id') 
-        ->get(); */
 
-        return view('schedule.create', compact('properties'));
+        $property = Property::find($property_id);
+        $customer = Customer::find($customer_id);
+
+        return view('schedule.create', compact('agentinfo','property','customer'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request, $property_id, $customer_id)
     {
         $date = $request->input('date');
         $formattedDate = Carbon::parse($date)->format('Y-m-d');
-
         $validatedData = $request->validate([
-            'property_id' => 'required|exists:properties,id',
             'times' => 'required|array',
             'times.*' => 'required', 
         ]);
 
         $user = auth()->user();
         $agentinfo = Agent::where('user_id', $user->id)->first();
-        $propertyId = $validatedData['property_id'];
+
         $date = $formattedDate;
         $times = $validatedData['times'];
 
         foreach ($times as $time) {
             $dateTime = date('Y-m-d H:i:s', strtotime("$date $time"));
-            $existingSchedule = Schedules::where('property_id', $propertyId)
-                                        ->where('time_schedule', $dateTime)
-                                        ->first();
+            $existingSchedule = Visit::where('property_id', $property_id)
+            ->where('schedule', $dateTime)
+            ->first();
 
             if (!$existingSchedule) {
-                $schedule = new Schedules();
-                $schedule->agent_id = $agentinfo->id;
-                $schedule->property_id = $propertyId;
-                $schedule->time_schedule = $dateTime;
-                $schedule->save();
+                $appointment = new Visit();
+                $appointment->schedule = $dateTime;
+                $appointment->convoy_type = $request->convoy_type;
+                $appointment->customer_id = $customer_id;
+                $appointment->agent_id = $agentinfo->id;
+                $appointment->property_id = $property_id;
+                $appointment->approval_status = 'pending';
+                $appointment->save();
             }
             else
             {

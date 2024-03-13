@@ -139,25 +139,18 @@ Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('s
 
     Route::get('/agent/inquiredetails/{property_id}/{customer_id}', [AgentController::class, 'inquiredetails'])->name('agent.inquiredetails');
 
+    //Schedules
+    Route::prefix('schedule')->group(function () {
+        Route::get('/create/{property_id}/{customer_id}', [ScheduleController::class, 'create'])->name('schedule.create');
+        Route::post('/store/{property_id}/{customer_id}', [ScheduleController::class, 'store'])->name('schedule.store');
+    });
 
-
+    
     // OLD
-
-    // Property
-    Route::get('/property/create', [PropertyController::class, 'create'])->name('property.create');
-    Route::post('/property/store', [PropertyController::class, 'store'])->name('property.store');
-    Route::get('/property/{id}/edit', [PropertyController::class, 'edit'])->name('property.edit');
-    Route::post('/property/{id}/update', [PropertyController::class, 'update'])->name('property.update');
-    Route::get('/property/{id}/delete', [PropertyController::class, 'delete'])->name('property.delete');
-
     Route::get('/agent/soldto/{customer_id}/{property_id}', [PropertyController::class, 'soldto'])->name('agent.soldto');
     Route::post('/agent/soldtox/{customer_id}/{property_id}', [PropertyController::class, 'sold'])->name('agent.sold');
 
-    //Schedules
-    Route::prefix('schedule')->group(function () {
-        Route::get('/create', [ScheduleController::class, 'create'])->name('schedule.create');
-        Route::post('/store', [ScheduleController::class, 'store'])->name('schedule.store');
-    });
+    
 
 //});
 
