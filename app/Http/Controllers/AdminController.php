@@ -19,7 +19,7 @@ use App\Models\Adminsold;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-
+use DB;
 class AdminController extends Controller
 {
     public function index()
@@ -35,7 +35,10 @@ class AdminController extends Controller
         $agents = Agent::All();
         $brokers = Broker::All();
         $users = User::All();
-        $Adminsold = Adminsold::All();
+        $Adminsold = DB::table('admin_has_sold')
+        ->join('solds', 'admin_has_sold.sold_id', '=', 'solds.id')
+        ->select('solds.property_id')
+        ->get();
         $usercount = User::count();
         $propertycount = Property::count();
         $agentcount = Agent::count();
