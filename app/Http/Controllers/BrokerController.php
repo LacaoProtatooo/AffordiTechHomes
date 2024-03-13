@@ -92,16 +92,17 @@ class BrokerController extends Controller
         return view('broker.inquiredetails', compact('customer','property','agents','customerinf'));
     }
 
-    public function inquireassign($customer_id, $property_id, $agent_id){
+    public function inquireassign($property_id, $customer_id, $agent_id){
         $user = Auth::user();
         $broker = Broker::where('user_id', $user->id)->first();
     
         // Update the Inquire record based on the provided conditions
-        $affectedRows = Inquire::where('customer_id', $customer_id)
-                        ->where('property_id', $property_id)
+        $affectedRows = Inquire::where('property_id', $property_id)
+                        ->where('customer_id', $customer_id)
                         ->where('broker_id', $broker->id)
                         ->update(['agent_id' => $agent_id]);
-    
+        
+                
         // Check if any rows were affected by the update operation
         if ($affectedRows > 0) {
             return redirect()->route('broker.dashboard')->with('success', 'Update Successfully');
