@@ -55,6 +55,19 @@ class AgentController extends Controller
     public function index()
     {  
         return view('agent.index');
+
+        $user = Auth::user();
+        $inquiries = Inquire::where('agent_id', $user->id)
+        ->join('properties', 'inquiries.property_id','=', 'properties.id')
+        ->get();
+
+        dd($inquiries);
+
+        foreach ($inquiries as $inq) {
+            $properties = Property::where('id', $inq->property_id)->get();
+        }
+
+        return view('agent.index',compact('inquiries','properties'));
     }
 
     // Register
