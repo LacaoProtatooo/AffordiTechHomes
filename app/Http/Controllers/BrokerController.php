@@ -62,13 +62,26 @@ class BrokerController extends Controller
     }
 
     public function inquiredetails($customer_id, $property_id){
-        $broker = Auth::user();
+
+        $user = Auth::user();
+        $broker = Broker::where('user_id', $user->id)->first();
+
         $customer = Customer::where('id', $customer_id)->first();
-        $property = Property::where('id', $property_id->id)->first();
+        $property = Property::where('id', $property_id)->first();
         $agents = Agent::where('broker_id', $broker->id)->get();
 
         return view('broker.inquiredetails', compact('customer','property','agents'));
     }
+
+    public function inquireassign($customer_id, $property_id, $agent_id){
+        $inquiry = Inquire::where('customer_id', $customer_id)->where('property_id', $property_id)->first();
+    
+        $inquiry->agent_id = $agent_id;
+        $inquiry->save();
+    
+        return redirect()->route('broker.dashboard');
+    }
+    
 
     public function agent()
     {

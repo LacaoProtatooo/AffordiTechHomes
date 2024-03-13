@@ -9,7 +9,9 @@ class Inquire extends Model
 {
     use HasFactory;
     protected $table = 'inquiries';
+    public $timestamps = false;
     protected $fillable = [
+        'id',
         'property_id',
         'customer_id',
         'broker_id',
