@@ -48,7 +48,7 @@ Route::get('/register/{role}', [LoginController::class, 'signup'])->name('signup
 Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('signup.submit');
 
 // ADMIN
-//Route::middleware('admin')->group(function () {
+Route::middleware('admin')->group(function () {
     Route::get('/admin/dashboard', [Admincontroller::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/profile', [Admincontroller::class, 'adminprofile'])->name('admin.profile');
     Route::post('/admin/update', [Admincontroller::class, 'update'])->name('admin.update');
@@ -77,38 +77,40 @@ Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('s
     Route::post('/property/{id}/update', [PropertyController::class, 'update'])->name('property.update');
     Route::get('/property/{id}/delete', [PropertyController::class, 'delete'])->name('property.delete');
 
-//});
+});
 
 // BROKER
-//Route::middleware('broker')->group(function () {
+Route::middleware('broker')->group(function () {
     Route::get('/broker/dashboard', [BrokerController::class, 'index'])->name('broker.dashboard');
     Route::get('/broker/profile', [BrokerController::class, 'brokerprofile'])->name('broker.profile');
     Route::post('/broker/update', [BrokerController::class, 'update'])->name('broker.update');
-    Route::get('/broker/agent', [BrokerController::class, 'agent'])->name('broker.agent');
 
+    // Broker to Agent
+    Route::get('/broker/agent', [BrokerController::class, 'agent'])->name('broker.agent');
+    Route::get('/broker/{id}/delete', [BrokerController::class, 'agentdelete'])->name('broker.agentdelete');
     Route::get('/broker/{id}/agentprofile', [BrokerController::class, 'agentprofile'])->name('broker.agentprofile');
     Route::post('/broker/{id}/agentupdate', [BrokerController::class, 'agentupdate'])->name('broker.agentupdate');
 
     Route::get('/broker/view/inquiry', [BrokerController::class, 'inquiry'])->name('broker.inquiry');
-    Route::get('/agent/inquiredetails/{customer_id}/{property_id}', [BrokerController::class, 'inquiredetails'])->name('broker.inquiredetails');    
-    Route::post('/agent/inquireassign/{property_id}/{customer_id}/{agent_id}', [BrokerController::class, 'inquireassign'])->name('broker.inquireassign');
+    Route::get('/broker/inquiredetails/{customer_id}/{property_id}', [BrokerController::class, 'inquiredetails'])->name('broker.inquiredetails');    
+    Route::post('/broker/inquireassign/{property_id}/{customer_id}/{agent_id}', [BrokerController::class, 'inquireassign'])->name('broker.inquireassign');
 
     Route::get('/broker/view/soldForm/{property_id}/{customer_id}/{agent_id}', [BrokerController::class, 'soldForm'])->name('broker.soldForm');
     Route::post('/broker/view/sold/{property_id}/{customer_id}/{agent_id}', [BrokerController::class, 'sold'])->name('broker.sold');
 
     Route::get('/broker/view/transaction', [BrokerController::class, 'transaction'])->name('broker.transaction');
 
+    
+
+    
     // Route::get('/agent/soldto/{customer_id}/{property_id}', [PropertyController::class, 'soldto'])->name('agent.soldto');    broker.inquiredetails
     // Route::post('/agent/soldtox/{customer_id}/{property_id}', [PropertyController::class, 'sold'])->name('agent.sold');
 
-    // To Be Implemented onto Broker Middleware
-    // Route::get('/admin/{id}/agentprofile', [Admincontroller::class, 'agentprofile'])->name('admin.agentprofile');
-    // Route::get('/admin/{id}/delete', [Admincontroller::class, 'delete'])->name('admin.agentdelete');
 
-//});
+});
 
 // CUSTOMER
-//Route::middleware('customer')->group(function () {
+Route::middleware('customer')->group(function () {
     Route::get('/customer/dashboard', [CustomerController::class, 'index'])->name('customer.dashboard');
 
     Route::get('/customer/profile', [CustomerController::class, 'customerprofile'])->name('customer.profile');
@@ -121,10 +123,10 @@ Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('s
     Route::get('/customer/view/transaction', [CustomerController::class, 'transaction'])->name('customer.transaction');
 
     Route::get('/schedule/customerschedule/{id}', [ScheduleController::class, 'CustomerScheduleStore'])->name('customer.schedule');
-//});
+});
 
 // AGENT
-//Route::middleware('agent')->group(function () {
+Route::middleware('agent')->group(function () {
     Route::get('/agent/dashboard', [AgentController::class, 'index'])->name('agent.dashboard');
     Route::get('/agent/view/Appointment', [AgentController::class, 'appointment'])->name('agent.appointment');
     Route::get('/agent/view/transaction', [AgentController::class, 'transaction'])->name('agent.transaction');
@@ -141,7 +143,7 @@ Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('s
         Route::post('/store/{property_id}/{customer_id}', [ScheduleController::class, 'store'])->name('schedule.store');
     });
 
-//});
+});
 
 // Property Info
 Route::get('/property/info', [PropertyController::class, 'propertyinfo'])->name('property.info');

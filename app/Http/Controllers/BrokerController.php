@@ -33,6 +33,14 @@ class BrokerController extends Controller
         return View('agent.agentprofile', compact('agentinfo','userinfo'));
     }
 
+    public function agentdelete($id){
+        $userinfo = Agent::find($id);
+
+        User::destroy($userinfo->user_id);
+
+        return redirect()->route('broker.dashboard');
+    }
+
     public function brokerprofile(){
         $user = auth()->user();
         $brokerinfo = Broker::where('user_id', $user->id)->first();

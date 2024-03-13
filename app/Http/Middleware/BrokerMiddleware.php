@@ -2,9 +2,15 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Customer;
+use App\Models\Admin;
+use App\Models\Agent;
+use App\Models\Broker;
+
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 
 class BrokerMiddleware
 {

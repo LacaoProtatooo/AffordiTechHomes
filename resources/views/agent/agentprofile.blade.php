@@ -95,6 +95,21 @@
                             </label>
                         </div>
 
+                        @php
+                            Use App\Models\Broker;
+                            $currentuser = Auth::user();
+                            $usertype = Broker::where('user_id', $currentuser->id)->first();
+                        @endphp
+                        
+                        @if (isset($usertype) && $usertype != NULL)
+                            <!-- Delete button -->
+                            <div class="col-span-6 sm:col-span-3 flex items-center"> 
+                                <button type="submit" onclick="if (confirm('Are you sure you want to unrecruit this Agent?')) { location.href='{{ route('broker.agentdelete', ['id' => $agentinfo->id]) }}'; } return false;" class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
+                                <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">Unrecruit Agent</span>
+                                </button>
+                            </div>
+                        @endif
+    
                         <script>
                             const newPasswordInput = document.getElementById('new_password');
                             const confirmNewPasswordInput = document.getElementById('confirm_new_password');
