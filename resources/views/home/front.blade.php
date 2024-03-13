@@ -1,3 +1,25 @@
+<?php
+use App\Models\Customer;
+use App\Models\Agent;
+use App\Models\Admin;
+use App\Models\Broker;
+use Carbon\Carbon;
+$currentUser = Auth::user();
+
+$customerinfo = null;
+$brokerinfo = null;
+$agentinfo = null;
+$admininfo = null;
+
+if ($currentUser) {
+    $customerinfo = Customer::where('user_id', $currentUser->id)->first();
+    $agentinfo = Agent::where('user_id', $currentUser->id)->first();
+    $brokerinfo = Broker::where('user_id', $currentUser->id)->first();
+    $admininfo = Admin::where('user_id', $currentUser->id)->first();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,8 +92,6 @@
         </div>
     </div>
   </nav>
-
-
 
   <!-- Start block -->
   <section class="bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200  dark:bg-gray-900">

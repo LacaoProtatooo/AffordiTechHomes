@@ -41,6 +41,8 @@ class ScheduleController extends Controller
         $date = $formattedDate;
         $times = $validatedData['times'];
 
+        //dd($times);
+
         foreach ($times as $time) {
             $dateTime = date('Y-m-d H:i:s', strtotime("$date $time"));
             $existingSchedule = Visit::where('property_id', $property_id)

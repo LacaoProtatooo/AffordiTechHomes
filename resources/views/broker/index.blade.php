@@ -41,10 +41,15 @@
     </nav>
 
 
-
+    
   {{-- TABLE --}}
-  <div class = "items-center justify-between mb-10 ml-10 mr-10 mt-10 w-full md:w-auto md:order-1 bg-green-200">
-    <div class="relative overflow-x-auto shadow-2xl sm:rounded-lg">
+  <div class = "items-center justify-between mb-10 ml-10 mr-10 mt-10 w-full md:w-auto md:order-1 bg-transparent">
+    <div class="items-center">
+        <div class="mb-4 lg:mb-0">
+          <h3 class="mb-2 text-xl font-bold text-gray-900 dark:text-white">Properties</h3>
+          <span class="text-base font-normal text-gray-500 dark:text-gray-400">This is a list of Properties Assigned</span>
+        </div>
+    <div class="relative overflow-x-auto shadow-2xl sm:rounded-lg mt-4 mb-36">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 bg-green-900">
             <thead class="text-xs text-white uppercase dark:bg-gray-700 dark:text-gray-400 bg-green-900">
                 <tr>
@@ -131,8 +136,9 @@
                 @endforeach
             </tbody>
         </table>
+        </div>
     </div>
-</div>
+  </div>
     @include('common.footer')
 </body>
 </html>

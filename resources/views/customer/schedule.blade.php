@@ -36,10 +36,10 @@
                     <td class="py-3 px-4">{{$schedule->property_id}}</td>
                     <td class="py-3 px-4">{{$schedule->address}}</td>
                   <td class="py-3 px-4">
-                    {{ \Carbon\Carbon::parse($schedule->time_schedule)->toDateString() }}
+                    {{ \Carbon\Carbon::parse($schedule->schedule)->toDateString() }}
                 </td>
                 <td class="py-3 px-4">
-                    {{ \Carbon\Carbon::parse($schedule->time_schedule)->format('h:i A') }}
+                    {{ \Carbon\Carbon::parse($schedule->schedule)->format('h:i A') }}
                 </td>
                 <td class="py-3 px-4">@if ($schedule->agent_name)
                   {{ $schedule->agent_name}}

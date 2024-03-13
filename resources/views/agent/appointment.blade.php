@@ -13,6 +13,9 @@
 <body class="bg-green-200 ">
     @include('message') 
     @include('common.header')
+    @php
+      //dd($schedules);
+    @endphp
 
     {{--Table for appointment--}}
     <br>
@@ -26,6 +29,7 @@
               <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Property ID</th>
               <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Date</th>
               <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Time</th>
+              <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Convoy Type</th>
               <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Customer Name</th>
               <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Phone Number</th>
             </tr>
@@ -36,20 +40,31 @@
                   <td class="py-3 px-4">{{$schedule->property_id}}</td>
                   <td class="py-3 px-4">
                     {{ \Carbon\Carbon::parse($schedule->time_schedule)->toDateString() }}
-                </td>
-                <td class="py-3 px-4">
+                  </td>
+                  <td class="py-3 px-4">
                     {{ \Carbon\Carbon::parse($schedule->time_schedule)->format('h:i A') }}
-                </td>
-                <td class="py-3 px-4">@if ($schedule->name)
-                  {{ $schedule->name}}
-              @else
-                  No Schedule Yet
-              @endif</td>
-              <td class="py-3 px-4">@if ($schedule->phone_number)
-                {{ $schedule->phone_number}}
-            @else
-                No Schedule Yet
-            @endif</td>
+                  </td>
+                  <td class="py-3 px-4">
+                    @if ($schedule->convoy_type)
+                      {{ $schedule->convoy_type}}
+                    @else
+                      No Schedule Yet
+                    @endif
+                  </td>
+                  <td class="py-3 px-4">
+                    @if ($schedule->name)
+                      {{ $schedule->name}}
+                    @else
+                      No Schedule Yet
+                    @endif
+                  </td>
+                  <td class="py-3 px-4">
+                    @if ($schedule->phone_number)
+                      {{ $schedule->phone_number}}
+                    @else
+                      No Schedule Yet
+                    @endif
+                  </td>
                 </tr>
             @endforeach
           </tbody>

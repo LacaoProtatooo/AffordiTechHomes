@@ -5,10 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Customer;
 use App\Models\Property;
-use App\Models\Schedules;
-use App\Models\Customer_schedule;
 use App\Models\Inquire;
-use App\Models\Approval;
 use App\Models\Propertybroker;
 
 use Illuminate\Http\Request;
@@ -64,19 +61,20 @@ class CustomerController extends Controller
     {
         $user = auth()->user();
         $customer = Customer::where('user_id', $user->id)->first();
-        $schedules = DB::table('schedules')
-        ->join('customer_schedules', 'schedules.id', '=', 'customer_schedules.schedule_id')
-        ->join('properties', 'schedules.property_id', '=', 'properties.id')
-        ->join('agents', 'properties.agent_id', '=', 'agents.id')
-        ->join('customers', 'customer_schedules.customer_id', '=', 'customers.id')
+        $schedules = DB::table('visits')
+        ->join('customers', 'visits.customer_id', '=', 'customers.id')
+        ->join('properties', 'visits.property_id', '=', 'properties.id')
+        ->join('agents', 'visits.agent_id', '=', 'agents.id')
         ->where('customers.id', $customer->id)
         ->select(
-        'schedules.*',
-        'properties.*',
-        'agents.name as agent_name',
-        'agents.phone_number as agent_phone_number'
+            'visits.*',
+            'properties.*',
+            'agents.name as agent_name',
+            'agents.phone_number as agent_phone_number'
         )
         ->get();
+
+        //dd($schedules);
 
         return view('customer.schedule',compact('schedules'));
     }
@@ -157,7 +155,6 @@ class CustomerController extends Controller
         ->select('properties.*', 'agents.name AS agent_name', 'agents.phone_number AS agent_contact', 'brokers.name AS broker_name','solds.payment_method')
         ->where('solds.customer_id', $customer->id)
         ->get();
-
 
         return view('customer.transaction', compact('solds'));
     }

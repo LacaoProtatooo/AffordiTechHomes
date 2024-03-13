@@ -70,7 +70,6 @@ Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('s
     //verify property sold
     Route::get('/admin/verify/{id}', [AdminController::class, 'verify'])->name('admin.verify');
 
-
     // Property Create
     Route::get('/property/create', [PropertyController::class, 'create'])->name('property.create');
     Route::post('/property/store', [PropertyController::class, 'store'])->name('property.store');

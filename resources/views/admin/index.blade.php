@@ -8,7 +8,7 @@
 
     <title>Admin</title>
 </head>
-<body class="bg-green-200 ">
+<body class="bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 ">
     @include('message')
     @include('common.header')
     @csrf

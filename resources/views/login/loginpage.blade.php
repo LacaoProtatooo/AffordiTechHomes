@@ -46,8 +46,8 @@
                             <!--SIGN UP-->
                             <a href="{{ route('signup.show', ['role' => 'customer']) }}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up as a Customer</a>
                             <br>
-                            <a href="{{ route('signup.show', ['role' => 'agent']) }}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up as a Agent</a>
-                            <br>
+                            {{-- <a href="{{ route('signup.show', ['role' => 'agent']) }}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up as a Agent</a>
+                            <br> --}}
                             <a href="{{ route('signup.show', ['role' => 'admin']) }}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up as a Admin</a>
                             {{-- <br>
                             <a href="{{ route('signup.show', ['role' => 'broker']) }}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up as a Broker</a> --}}

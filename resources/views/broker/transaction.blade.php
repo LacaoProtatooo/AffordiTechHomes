@@ -10,7 +10,7 @@
 
     <title>AffordiTech</title>
 </head>
-<body class="bg-green-200 ">
+<body class="bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200">
     @include('message') 
     @include('common.header')
 
@@ -18,7 +18,7 @@
     <br>
     <div class="items-center justify-between mb-20 ml-4 mr-4 mt-4 w-auto rounded-lg">
     
-    <div class="overflow-x-auto mt-8"> <!-- Add margin top for separation -->
+    <div class="overflow-x-auto mt-8 rounded-lg"> <!-- Add margin top for separation -->
         <h2 class="text-2xl font-semibold mb-4">Sold Properties</h2> <!-- Added h2 heading -->
         <table class="min-w-full bg-white">
           <thead class="bg-gray-100">

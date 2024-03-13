@@ -122,22 +122,23 @@
 
     <div class="flex flex-col items-center justify-center px-6 py-8 mt-10 mx-auto lg:py-4 rounded-lg mb-6 ml-4 mr-4 bg-transparent">
         <div id="custom-controls-gallery" class="relative w-full flex items-center justify-center">
-            <button id="confirmNegotiation" onclick="location.href='{{ route('schedule.create', ['customer_id' => $customer->id, 'property_id' => $property->id]) }}'"
-            type="button" class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+            <button id="confirmNegotiation" onclick="confirmNegotiation('{{ route('schedule.create', ['customer_id' => $customer->id, 'property_id' => $property->id]) }}')"
+                type="button" class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
                 Create Appointment Schedule
             </button>
         </div>
     </div>
-
+    
     <script>
-        document.getElementById('confirmNegotiation').addEventListener('click', function() {
+        function confirmNegotiation(scheduleUrl) {
             var confirmation = confirm("Are you sure you want to confirm negotiations?");
- 
+    
             if (confirmation) {
-                document.getElementById('confirmNegotiation').click();
+                window.location.href = scheduleUrl;
             }
-        });
+        }
     </script>
+    
 
 
 

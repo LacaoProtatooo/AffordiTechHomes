@@ -51,36 +51,34 @@
         <br>
 
         {{-- DETAILS --}}
-        <div class="grid md:grid-cols-2 md:gap-2">
+        <div class="grid md:grid-cols-2 md:gap-2 mb-4 mt-4">
             <div class="mb-1">
                 <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Property Description: {{$property->description}}</p><br>
                 <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Property Developer: {{$property->developer}}</p><br>
                 <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Property Type: {{$property->property_type}}</p><br>
                 <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Property Unit: {{$property->unit}}</p><br>
                 <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Property Block: {{$property->block}}</p><br>
+            </div>
+            <div class="mb-1">
                 <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Bedrooms: {{$property->rooms}}</p><br>
                 <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Comfort Rooms: {{$property->cr}}</p><br>
                 <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Property Area: {{$property->sqm}}</p><br>
                 <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Property Price: {{$property->price}}</p><br>
                 <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Property Address: {{$property->address}}</p><br>
             </div>
-
         </div>
-
+        
         <div class="items-center justify-center relative mb-5">
             @if (auth()->user())
             <button type="button" onclick="confirmInquiry('{{ route('customer.inquire', $property->id) }}')" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-lg px-5 py-2.5 text-center me-4 mb-2">Property Inquire</button>
-
-
             @endif
         </div>
     </div>
+
     <script>
         function confirmInquiry(inquiryUrl) {
-            // Display confirmation dialog
             const confirmed = window.confirm("Are you sure you want to inquire about this property?");
-            
-            // If user confirms, redirect to the inquiry URL
+
             if (confirmed) {
                 window.location.href = inquiryUrl;
             }

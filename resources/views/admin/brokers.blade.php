@@ -90,10 +90,10 @@
                       </td>
                       <td>
                           <!-- VIEW DETAILS -->
-                          <button type="button" onclick="location.href='{{ route('admin.brokerprofile', ['id' => $broker->id]) }}';" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-0">DETAILS</button>
+                          <button type="button" onclick="location.href='{{ route('admin.brokerprofile', ['id' => $broker->id]) }}';" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-0">Details</button>
                       </td>
                       <td>
-                        <button type="button" onclick="location.href='{{ route('admin.brokerassignform', ['id' => $broker->id]) }}';" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-0">Assign Proerty</button>
+                        <button type="button" onclick="location.href='{{ route('admin.brokerassignform', ['id' => $broker->id]) }}';" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-0">Assign Property</button>
                       </td>
                     </tr>
                   @endforeach
