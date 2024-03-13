@@ -21,7 +21,7 @@ class CustomerController extends Controller
     {
         $user = auth()->user();
         $customerinfo = Customer::where('user_id', $user->id)->first();
-        $properties = Property::All();
+        $properties = Property::where('status','available');
         return view('customer.index', compact('properties','customerinfo'));
     }
 
@@ -92,7 +92,7 @@ class CustomerController extends Controller
     ->leftJoin('agents as a', 'i.agent_id', '=', 'a.id')
     ->join('properties as p', 'i.property_id', '=', 'p.id')
     ->where('i.customer_id', $customer->id)
-    ->select('i.*', 'c.*', 'b.name as broker_name', 'b.phone_number as broker_contact', 'a.name as agent_name', 'a.phone_number as agent_contact', 'p.address as property_address')
+    ->select('i.*', 'c.*', 'b.name as broker_name', 'b.phone_number as broker_contact', 'a.name as agent_name', 'a.phone_number as agent_contact', 'p.address as property_address','p.description')
     ->get();
 
     return view('customer.inquire', compact('customer','inquires'));
@@ -138,12 +138,13 @@ class CustomerController extends Controller
         $customer = Customer::where('user_id', $user->id)->first();
 
         $solds = DB::table('solds')
-            ->join('properties', 'solds.property_id', '=', 'properties.id')
-            ->join('agents', 'properties.agent_id', '=', 'agents.id')
-            ->join('customers', 'solds.customer_id', '=', 'customers.id')
-            ->where('customers.id', $customer->id) // Assuming $customer is defined somewhere in your code
-            ->select('solds.property_id', 'properties.price', 'agents.name as agent_name', 'agents.phone_number as agent_phone_number','solds.payment_method')
-            ->get();
+        ->join('properties', 'solds.property_id', '=', 'properties.id')
+        ->join('agents', 'solds.agent_id', '=', 'agents.id')
+        ->join('brokers', 'agents.broker_id', '=', 'brokers.id')
+        ->select('properties.*', 'agents.name AS agent_name', 'agents.phone_number AS agent_contact', 'brokers.name AS broker_name','solds.payment_method')
+        ->where('solds.customer_id', $customer->id)
+        ->get();
+
 
         return view('customer.transaction', compact('solds'));
     }
