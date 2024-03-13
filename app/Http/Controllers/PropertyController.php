@@ -27,21 +27,9 @@ class PropertyController extends Controller
     }
 
     public function homepopulate(){
-        $properties = Property::join('approvals', 'properties.id', '=', 'approvals.property_id')
-        ->where('approvals.status_of_approval', 'approved')
-        ->where('properties.status','available')
-        ->select('properties.*') 
-        ->get();
-
-        foreach ($properties as $property) {
-            $agentinfo = Agent::where('id', $property->agent_id)->first();
-    
-            if ($agentinfo != null) {
-                $property->agentinfo = $agentinfo;
-            }
-        }
+        $properties = Property::where('status','available')->get();        
         
-        return view('home.home', compact('properties'));
+        return view('home.home',compact('properties'));
     }
 
     public function welcome(){
