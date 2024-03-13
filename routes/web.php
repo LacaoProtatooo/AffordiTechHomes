@@ -66,6 +66,10 @@ Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('s
 
     Route::get('/admin/{id}/brokerAssignForm/', [Admincontroller::class, 'assignForm'])->name('admin.brokerassignform');
     Route::post('/admin/{id}/assignbroker/', [Admincontroller::class, 'brokerAssign'])->name('admin.brokerAssign');
+    
+    //verify property sold
+    Route::get('/admin/verify/{id}', [AdminController::class, 'verify'])->name('admin.verify');
+
 
     // Property Create
     Route::get('/property/create', [PropertyController::class, 'create'])->name('property.create');
@@ -87,11 +91,11 @@ Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('s
     Route::post('/broker/{id}/agentupdate', [BrokerController::class, 'agentupdate'])->name('broker.agentupdate');
 
     Route::get('/broker/view/inquiry', [BrokerController::class, 'inquiry'])->name('broker.inquiry');
-    Route::get('/broker/inquiredetails/{customer_id}/{property_id}', [BrokerController::class, 'inquiredetails'])->name('broker.inquiredetails');    
-    Route::post('/broker/inquireassign/{property_id}/{customer_id}/{agent_id}', [BrokerController::class, 'inquireassign'])->name('broker.inquireassign');
+    Route::get('/agent/inquiredetails/{customer_id}/{property_id}', [BrokerController::class, 'inquiredetails'])->name('broker.inquiredetails');    
+    Route::post('/agent/inquireassign/{property_id}/{customer_id}/{agent_id}', [BrokerController::class, 'inquireassign'])->name('broker.inquireassign');
 
     Route::get('/broker/view/soldForm/{property_id}/{customer_id}/{agent_id}', [BrokerController::class, 'soldForm'])->name('broker.soldForm');
-    Route::post('/broker/view/sold/', [BrokerController::class, 'sold'])->name('broker.sold');
+    Route::post('/broker/view/sold/{property_id}/{customer_id}/{agent_id}', [BrokerController::class, 'sold'])->name('broker.sold');
 
     Route::get('/broker/view/transaction', [BrokerController::class, 'transaction'])->name('broker.transaction');
 
@@ -130,7 +134,7 @@ Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('s
     Route::get('/agent/profile', [AgentController::class, 'agentprofile'])->name('agent.profile');
     Route::post('/agent/update', [AgentController::class, 'update'])->name('agent.update');
 
-    Route::get('/agent/inquiredetails/{property_id}/{customer_id}', [AgentController::class, 'inquiredetails'])->name('agent.inquiredetails');
+    Route::get('/agent/inquirydetails/{property_id}/{customer_id}', [AgentController::class, 'inquiredetails'])->name('agent.inquiredetails');
 
     //Schedules
     Route::prefix('schedule')->group(function () {

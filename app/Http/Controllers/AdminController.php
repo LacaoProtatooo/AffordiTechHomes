@@ -14,6 +14,7 @@ use App\Models\Schedules;
 use App\Models\Inquire;
 use App\Models\Propertybroker;
 use App\Models\Customer_schedule;
+use App\Models\Adminsold;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -26,13 +27,15 @@ class AdminController extends Controller
         $user = auth()->user();
         $admininfo = Admin::where('user_id', $user->id)->first();
 
-        $solds = Solds::All();
+        $solds = Solds::select('solds.*', 'agents.name as agent_name')
+        ->join('agents', 'solds.agent_id', '=', 'agents.id')
+        ->get();
         $approval = Approval::All();
         $properties = Property::All();
         $agents = Agent::All();
         $brokers = Broker::All();
         $users = User::All();
-
+        $Adminsold = Adminsold::All();
         $usercount = User::count();
         $propertycount = Property::count();
         $agentcount = Agent::count();
@@ -40,7 +43,7 @@ class AdminController extends Controller
         $propertySoldCount = Property::where('status', 'sold')->count();
         $propertyavailCount = Property::where('status', 'available')->count();
 
-        return view('admin.index', compact('properties','admininfo','solds','approval','agents','users','usercount','propertycount','agentcount','brokercount','brokers','propertySoldCount','propertyavailCount'));
+        return view('admin.index', compact('properties','admininfo','solds','approval','agents','users','usercount','propertycount','agentcount','brokercount','brokers','propertySoldCount','propertyavailCount','Adminsold'));
     }
     
     public function register(Request $request){
@@ -224,7 +227,19 @@ class AdminController extends Controller
         $propertybroker->broker_id = $id;
         $propertybroker->save();
 
-        return redirect()->route('admin.dashboard')->with('success','Added tp the broker Successfully');
+        return redirect()->route('admin.dashboard')->with('success','Added to the broker Successfully');
 
+    }
+
+    public function verify($property_id)
+    {
+        $sold = Solds::where('property_id',$property_id)->first();
+        $user = auth()->user();
+        $admin = Admin::where('user_id', $user->id)->first();
+        $Verify = new Adminsold();
+        $Verify->admin_id = $admin->id;
+        $Verify->sold_id = $sold->id;
+        $Verify->save();
+        return redirect()->route('admin.dashboard')->with('success','Property Sold Has been verified');
     }
 }
