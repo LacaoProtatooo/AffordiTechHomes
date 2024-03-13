@@ -199,7 +199,19 @@
                           {{$property->price}}
                         </td>
                         <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
-                          {{-- para to sa agent seler na nakabenta sa property inalis ko lang dahil nag eerror --}}
+                          @php
+                            $agent = '';
+                            if($property->status != 'available'){
+                              // get payment method
+                              foreach($solds as $sold){
+                                if($sold->property_id == $property->id){
+                                  $agent = $sold->agent_name;
+                                  break;
+                                }
+                              }
+                            }
+                          @endphp
+                          {{$agent}}
                         </td>
                         <td class="inline-flex items-center p-4 space-x-2 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
                           @php
@@ -222,19 +234,11 @@
                             <!-- SOLD STATUS -->
                             <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md dark:bg-gray-700 dark:text-green-400 border border-green-100 dark:border-green-500">{{$property->status}}</span>
                         </td>
-                        @php
-                            // VIEW DETAILS THE PAYMENT METHOD
-                            if ($property->status != 'available') {
-                                echo '
-                                    <td>
-                                        <!-- IF SOLD (MAKE IT APPROVED)-->
-                                        <button type="button" onclick="window.location.href=\''. route('admin.propertydetails', $property->id) .'\'" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-0">Details</button>
-                                    </td>
-                                ';
-                            }
-                        @endphp
-
-
+                        <td>
+                          @if ($property->status != 'available')
+                          <button type="button" onclick="window.location.href='{{ route('admin.verify', $property->id) }}'" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-0">Verify</button>
+                          @endif
+                      </td>
                       </tr>
                     @endforeach
                     
