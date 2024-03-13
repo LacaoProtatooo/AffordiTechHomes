@@ -47,7 +47,7 @@ class BrokerController extends Controller
         $user = auth()->user();
         $broker = Broker::where('user_id', $user->id)->first();
  
-        $inquiries = Inquire::
+        /*$inquiries = Inquire::
         join('property_has_broker as phb_property_id', 'inquiries.property_id', '=', 'phb_property_id.property_id')
         ->join('properties as pph','phb_property_id.property_id','=','pph.id')
         ->join('customers', 'inquiries.customer_id', '=', 'customers.id')
@@ -55,15 +55,24 @@ class BrokerController extends Controller
         ->join('property_has_broker as phb_broker_id', 'inquiries.broker_id', '=', 'phb_broker_id.broker_id')
         ->where('phb_broker_id.broker_id', $broker->id)
         ->where('pph.status', 'available')
+        ->get();*/
+
+        $inquiries = DB::table('inquiries as i')
+        ->join('customers as c', 'i.customer_id', '=', 'c.id')
+        ->join('brokers as b', 'i.broker_id', '=', 'b.id')
+        ->leftJoin('agents as a', 'i.agent_id', '=', 'a.id')
+        ->join('properties as p', 'i.property_id', '=', 'p.id')
+        ->where('i.broker_id', $broker->id)
+        ->select('i.*', 'c.*','p.address','p.description','a.name as agent_name')
         ->get();
 
-        foreach( $inquiries as $inquiry ){
+        /*foreach( $inquiries as $inquiry ){
             $customers = Customer::where('id', $inquiry->customer_id)->get();
-        }
+        }*/
 
         $agents = Agent::where('broker_id', $broker->id)->get();
         
-        return view('broker.inquire', compact('inquiries','broker','customers','agents'));
+        return view('broker.inquire', compact('inquiries','broker','agents'));
     }
 
     public function inquiredetails($customer_id, $property_id){
@@ -80,11 +89,10 @@ class BrokerController extends Controller
     }
 
     public function inquireassign($customer_id, $property_id, $agent_id){
-        $inquiry = Inquire::where('customer_id', $customer_id)->where('property_id', $property_id)->first();
+        $inquiry = Inquire::where('customer_id', $customer_id)
+                        ->where('property_id', $property_id)
+                        ->update(['agent_id' => $agent_id]);
         
-        $inquiry->agent_id = $agent_id;
-        $inquiry->save();
-    
         return redirect()->route('broker.dashboard');
     }
     
