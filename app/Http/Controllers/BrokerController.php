@@ -78,7 +78,7 @@ class BrokerController extends Controller
 
     public function inquireassign($customer_id, $property_id, $agent_id){
         $inquiry = Inquire::where('customer_id', $customer_id)->where('property_id', $property_id)->first();
-    
+        
         $inquiry->agent_id = $agent_id;
         $inquiry->save();
     
