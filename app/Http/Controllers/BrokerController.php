@@ -79,11 +79,15 @@ class BrokerController extends Controller
 
         $user = Auth::user();
         $broker = Broker::where('user_id', $user->id)->first();
-
         $customer = Customer::where('id', $customer_id)->first();
         $customerinf = User::where('id', $customer->id)->first();
         $property = Property::where('id', $property_id)->first();
         $agents = Agent::where('broker_id', $broker->id)->get();
+
+        if($agents->isEmpty())
+    {
+    return redirect()->route('broker.inquiry')->with('error','No agents have been created yet');
+    }
 
         return view('broker.inquiredetails', compact('customer','property','agents','customerinf'));
     }
