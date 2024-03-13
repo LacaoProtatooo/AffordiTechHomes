@@ -98,6 +98,8 @@ Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('s
 
     Route::get('/broker/view/soldForm/{property_id}/{customer_id}/{agent_id}', [BrokerController::class, 'soldForm'])->name('broker.soldForm');
     Route::post('/broker/view/sold/', [BrokerController::class, 'sold'])->name('broker.sold');
+
+    Route::get('/broker/view/transaction', [BrokerController::class, 'transaction'])->name('broker.transaction');
     // Route::get('/agent/soldto/{customer_id}/{property_id}', [PropertyController::class, 'soldto'])->name('agent.soldto');    broker.inquiredetails
     // Route::post('/agent/soldtox/{customer_id}/{property_id}', [PropertyController::class, 'sold'])->name('agent.sold');
 
