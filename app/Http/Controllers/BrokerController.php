@@ -85,9 +85,9 @@ class BrokerController extends Controller
         $agents = Agent::where('broker_id', $broker->id)->get();
 
         if($agents->isEmpty())
-    {
-    return redirect()->route('broker.inquiry')->with('error','No agents have been created yet');
-    }
+        {
+        return redirect()->route('broker.inquiry')->with('error','No agents have been created yet');
+        }
 
         return view('broker.inquiredetails', compact('customer','property','agents','customerinf'));
     }
