@@ -24,21 +24,29 @@
           <thead class="bg-gray-100">
             <tr>
               <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Property ID</th>
+              <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Title</th>
+              <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Address</th>
               <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Price</th>
               <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Payment Method</th>
               <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Customer Name</th>
               <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Customer Contact</th>
+              <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Agent Name</th>
+              <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Agent Contact </th>
             </tr>
           </thead>
           <tbody class="text-gray-700">
             @foreach ($solds as $sold)
             <tr>
-            <td class="py-3 px-4">{{ $sold->property_id }}</td>
-            <td class="py-3 px-4">₱ {{ $sold->price }}</td>
-            <td class="py-3 px-4">{{ $sold->payment_method}}</td>
-            <td class="py-3 px-4">{{ $sold->customer_name}}</td>
-            <td class="py-3 px-4">{{ $sold->customer_phone_number}}</td>
-            </tr>
+              <td class="py-3 px-4">{{$sold->property_id}}</td>
+              <td class="py-3 px-4">{{$sold->description}}</td>
+              <td class="py-3 px-4">{{$sold->address}}</td>
+              <td class="py-3 px-4">₱{{$sold->price}}</td>
+              <td class="py-3 px-4">{{$sold->payment_method}}</td>
+              <td class="py-3 px-4">{{$sold->customer_name}}</td>
+              <td class="py-3 px-4">{{$sold->customer_contact}}</td>
+              <td class="py-3 px-4">{{$sold->agent_name}}</td>
+              <td class="py-3 px-4">{{$sold->agent_contact}}</td>
+              </tr>  
             @endforeach
           </tbody>
         </table>
