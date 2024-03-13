@@ -126,7 +126,7 @@ class BrokerController extends Controller
 
         $agentinfo->save();
 
-        return redirect()->route('broker.dashboard');
+        return redirect()->route('broker.dashboard')->with('success', 'Updated Successfully');
     }
 
     
