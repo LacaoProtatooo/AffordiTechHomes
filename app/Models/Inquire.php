@@ -11,6 +11,7 @@ class Inquire extends Model
     protected $table = 'inquiries';
     public $timestamps = false;
     protected $fillable = [
+        'id',
         'property_id',
         'customer_id',
         'broker_id',
