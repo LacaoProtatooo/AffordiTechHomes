@@ -23,23 +23,23 @@
         <table class="min-w-full bg-white">
           <thead class="bg-gray-100">
             <tr>
-              <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Property ID</th>
-              <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Address</th>
+              <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Property Description</th>
+              <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Property Address</th>
+              <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Property Price</th>
               <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Customer Name</th>
               <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Customer Contact</th>
-              <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Buy</th>
+              <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Broker Name</th>
             </tr>
           </thead>
           <tbody class="text-gray-700">
             @foreach ($inquiries as $inquire)
             <tr>
-            <td class="py-3 px-4">{{ $inquire->property_id }}</td>
-            <td class="py-3 px-4">{{ $inquire->address }}</td>
+            <td class="py-3 px-4">{{ $inquire->property_description }}</td>
+            <td class="py-3 px-4">{{ $inquire->property_address }}</td>
+            <td class="py-3 px-4">{{ $inquire->property_price }}</td>
             <td class="py-3 px-4">{{ $inquire->customer_name }}</td>
-            <td class="py-3 px-4">{{ $inquire->customer_phone_number }}</td>
-            <td class="py-3 px-4">
-              <a href="{{ route('agent.soldto', ['property_id' =>$inquire->property_id, 'customer_id' =>$inquire->customer_id]) }}" class="text-blue-500 hover:underline">Sold</a>
-            </tr>
+            <td class="py-3 px-4">{{ $inquire->customer_contact }}</td>
+            <td class="py-3 px-4">{{ $inquire->broker_name }}</td>
             </tr> 
             @endforeach
           </tbody>
