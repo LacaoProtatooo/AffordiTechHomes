@@ -81,19 +81,6 @@
                 <label for="floating_address" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Address</label>
             </div>
 
-            @if ($end_segment == 'broker')
-                @php
-                    $properties = $properties = \App\Models\Property::all();
-                @endphp
-
-                <select id="property" name="property" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg mb-3 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <option selected disabled>Property Assigned</option>
-                @foreach ($properties as $property)
-                    <option value="{{ $property->id }}">{{ $property->description }}</option>
-                @endforeach
-                </select>
-            @endif
-
             <!--Submit-->
             <button type="submit" id="submitBtn" onclick="validatePasswords()" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center hover:px-6 hover:py-3.5 dark:bg-blue-600 dark:hover:bg-blue-700">Submit</button>
           </form>
