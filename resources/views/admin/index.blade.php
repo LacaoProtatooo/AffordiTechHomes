@@ -236,7 +236,17 @@
                         </td>
                         <td>
                           @if ($property->status != 'available')
+                          @php $verified = false; @endphp
+                          @foreach ($Adminsold as $adminsol)
+                          @if ($adminsol->property_id == $property->id)
+                          Verified
+                          @php $verified = true; @endphp
+                          @break
+                          @endif
+                          @endforeach
+                          @if (!$verified)
                           <button type="button" onclick="window.location.href='{{ route('admin.verify', $property->id) }}'" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-0">Verify</button>
+                          @endif
                           @endif
                       </td>
                       </tr>
@@ -373,7 +383,9 @@
                       Email
                     </th>
                     <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                      Broker
                     </th>
+                  
                   </tr>
                 </thead>
 
@@ -406,6 +418,17 @@
                         @endforeach
 
                         {{$agentemail}}
+                      </td>
+                      <td class="inline-flex items-center p-4 space-x-2 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                        @foreach ($brokers as $broker)
+                          @if ($broker->id == $agent->broker_id)
+                            @php
+                              $brokername = $broker->name;
+                              break;
+                            @endphp
+                          @endif
+                        @endforeach
+                        {{$brokername}}
                       </td>
                       {{-- <td>
                           <!-- IF SOLD (MAKE IT APPROVED)-->
