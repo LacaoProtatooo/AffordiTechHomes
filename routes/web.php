@@ -89,7 +89,10 @@ Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('s
     Route::post('/broker/{id}/agentupdate', [BrokerController::class, 'agentupdate'])->name('broker.agentupdate');
 
     Route::get('/broker/view/inquiry', [BrokerController::class, 'inquiry'])->name('broker.inquiry');
-    // Route::get('/agent/soldto/{customer_id}/{property_id}', [PropertyController::class, 'soldto'])->name('agent.soldto');
+    Route::get('/agent/inquiredetails/{customer_id}/{property_id}', [BrokerController::class, 'inquiredetails'])->name('broker.inquiredetails');    
+    // Route::post('/agent/soldtox/{customer_id}/{property_id}', [PropertyController::class, 'sold'])->name('agent.sold');
+
+    // Route::get('/agent/soldto/{customer_id}/{property_id}', [PropertyController::class, 'soldto'])->name('agent.soldto');    broker.inquiredetails
     // Route::post('/agent/soldtox/{customer_id}/{property_id}', [PropertyController::class, 'sold'])->name('agent.sold');
 
     // To Be Implemented onto Broker Middleware

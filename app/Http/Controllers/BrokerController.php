@@ -61,6 +61,15 @@ class BrokerController extends Controller
         return view('broker.inquire', compact('inquiries','broker','customers'));
     }
 
+    public function inquiredetails($customer_id, $property_id){
+        $broker = Auth::user();
+        $customer = Customer::where('id', $customer_id)->first();
+        $property = Property::where('id', $property_id->id)->first();
+        $agents = Agent::where('broker_id', $broker->id)->get();
+
+        return view('broker.inquiredetails', compact('customer','property','agents'));
+    }
+
     public function agent()
     {
         $user = Auth::user();
