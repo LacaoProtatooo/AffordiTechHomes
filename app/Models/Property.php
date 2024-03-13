@@ -25,4 +25,9 @@ class Property extends Model
         'status',
         'image_path', 
     ];
+
+    public function propertyBrokers()
+    {
+        return $this->hasMany(PropertyBroker::class, 'property_id');
+    }
 }
