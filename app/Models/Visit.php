@@ -9,6 +9,7 @@ class Visit extends Model
 {
     use HasFactory;
     protected $table = 'visits';
+    public $timestamps = false;
     protected $fillable = [
         'id',
         'schedule',
