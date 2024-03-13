@@ -12,6 +12,7 @@ use App\Models\Property;
 use App\Models\Approval;
 use App\Models\Schedules;
 use App\Models\Inquire;
+use App\Models\Propertybroker;
 use App\Models\Customer_schedule;
 
 use Illuminate\Http\Request;
@@ -206,5 +207,22 @@ class AdminController extends Controller
         $useragent = User::where('id', $agentinfo->user_id)->first();
 
         return View('admin.propertydetails', compact('propertyinfo','agentinfo','soldproperty','customerinfo','usercustomer','useragent'));
+    }
+
+    public function assignForm($id){
+        $properties = Property::doesntHave('propertyBrokers')->get();
+        $broker = Broker::where('id', $id)->first();
+        return view('admin.brokerassign',compact('properties','broker'));
+    }
+
+    public function brokerAssign(request $request,$id)
+    {
+        $propertybroker = new Propertybroker();
+        $propertybroker->property_id = $request->propertytype;
+        $propertybroker->broker_id = $id;
+        $propertybroker->save();
+
+        return redirect()->route('admin.dashboard')->with('success','Added tp the broker Successfully');
+
     }
 }
