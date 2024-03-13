@@ -52,7 +52,6 @@ Route::middleware('admin')->group(function () {
     Route::get('/admin/dashboard', [Admincontroller::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/profile', [Admincontroller::class, 'adminprofile'])->name('admin.profile');
     Route::post('/admin/update', [Admincontroller::class, 'update'])->name('admin.update');
-    
 
     Route::get('/admin/brokers', [Admincontroller::class, 'brokers'])->name('admin.brokers');
     Route::get('/admin/{id}/brokerprofile', [Admincontroller::class, 'brokerprofile'])->name('admin.brokerprofile');
@@ -99,14 +98,6 @@ Route::middleware('broker')->group(function () {
     Route::post('/broker/view/sold/{property_id}/{customer_id}/{agent_id}', [BrokerController::class, 'sold'])->name('broker.sold');
 
     Route::get('/broker/view/transaction', [BrokerController::class, 'transaction'])->name('broker.transaction');
-
-    
-
-    
-    // Route::get('/agent/soldto/{customer_id}/{property_id}', [PropertyController::class, 'soldto'])->name('agent.soldto');    broker.inquiredetails
-    // Route::post('/agent/soldtox/{customer_id}/{property_id}', [PropertyController::class, 'sold'])->name('agent.sold');
-
-
 });
 
 // CUSTOMER
