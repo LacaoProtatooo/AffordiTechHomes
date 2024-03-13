@@ -37,8 +37,10 @@ class AdminController extends Controller
         $propertycount = Property::count();
         $agentcount = Agent::count();
         $brokercount = Broker::count();
+        $propertySoldCount = Property::where('status', 'sold')->count();
+        $propertyavailCount = Property::where('status', 'available')->count();
 
-        return view('admin.index', compact('properties','admininfo','solds','approval','agents','users','usercount','propertycount','agentcount','brokercount','brokers'));
+        return view('admin.index', compact('properties','admininfo','solds','approval','agents','users','usercount','propertycount','agentcount','brokercount','brokers','propertySoldCount','propertyavailCount'));
     }
     
     public function register(Request $request){
