@@ -32,7 +32,6 @@
               <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Customer Name</th>
               <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Customer Contact</th>
               <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Agent Assigned</th>
-              <th class="text-left py-3 px-4 uppercase font-semibold text-sm"></th>
             </tr>
           </thead>
           <tbody class="text-gray-700">
@@ -40,21 +39,12 @@
             <tr>
             <td class="py-3 px-4">{{ $inquire->property_id }}</td>
             <td class="py-3 px-4">{{ $inquire->description }}</td>
-            
-            @foreach ($customers as $customer)
-              @if ($customer->id == $inquire->customer_id)
-                <td class="py-3 px-4">{{ $customer->address }}</td>
-                <td class="py-3 px-4">{{ $customer->name }}</td>
-                <td class="py-3 px-4">{{ $customer->phone_number }}</td>
-              @endif
-            @endforeach
-
-            @foreach ($agents as $agent)
-              @if ($inquire->agent_id == $agent->id)
-                <td class="py-3 px-4">{{ $agent->name }}</td>
-              @endif
-            @endforeach
-            
+            <td class="py-3 px-4">{{ $inquire->address }}</td>
+            <td class="py-3 px-4">{{ $inquire->name }}</td>
+            <td class="py-3 px-4">{{ $inquire->phone_number }}</td>
+            @if ($inquire->agent_name)
+            <td class="py-3 px-4">{{$inquire->agent_name}}</td>
+            @else
             <td class="py-3 px-4">
               <button onclick="location.href='{{ route('broker.inquiredetails', ['property_id' => $inquire->property_id, 'customer_id' => $inquire->customer_id]) }}'"
                 class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
@@ -62,10 +52,8 @@
                   Details
                 </span>
               </button>
-
-              
             </tr>
-            </tr> 
+            @endif
             @endforeach
           </tbody>
         </table>
