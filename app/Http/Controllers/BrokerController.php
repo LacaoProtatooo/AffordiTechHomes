@@ -57,8 +57,10 @@ class BrokerController extends Controller
         foreach( $inquiries as $inquiry ){
             $customers = Customer::where('id', $inquiry->customer_id)->get();
         }
+
+        $agents = Agent::where('broker_id', $broker->id)->get();
         
-        return view('broker.inquire', compact('inquiries','broker','customers'));
+        return view('broker.inquire', compact('inquiries','broker','customers','agents'));
     }
 
     public function inquiredetails($customer_id, $property_id){
@@ -67,10 +69,11 @@ class BrokerController extends Controller
         $broker = Broker::where('user_id', $user->id)->first();
 
         $customer = Customer::where('id', $customer_id)->first();
+        $customerinf = User::where('id', $customer->id)->first();
         $property = Property::where('id', $property_id)->first();
         $agents = Agent::where('broker_id', $broker->id)->get();
 
-        return view('broker.inquiredetails', compact('customer','property','agents'));
+        return view('broker.inquiredetails', compact('customer','property','agents','customerinf'));
     }
 
     public function inquireassign($customer_id, $property_id, $agent_id){

@@ -31,6 +31,7 @@
               <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Address</th>
               <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Customer Name</th>
               <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Customer Contact</th>
+              <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Agent Assigned</th>
               <th class="text-left py-3 px-4 uppercase font-semibold text-sm"></th>
             </tr>
           </thead>
@@ -47,7 +48,12 @@
                 <td class="py-3 px-4">{{ $customer->phone_number }}</td>
               @endif
             @endforeach
-            
+
+            @foreach ($agents as $agent)
+              @if ($inquire->agent_id == $agent->id)
+                <td class="py-3 px-4">{{ $agent->name }}</td>
+              @endif
+            @endforeach
             
             <td class="py-3 px-4">
               <button onclick="location.href='{{ route('broker.inquiredetails', ['property_id' => $inquire->property_id, 'customer_id' => $inquire->customer_id]) }}'"

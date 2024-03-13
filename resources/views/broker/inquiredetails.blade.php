@@ -13,13 +13,13 @@
     @foreach ($agents as $agentaaa)
     @endforeach
     @php
-        //dd($property); compact('customer','property','agents'));
+        // dd($property); compact('customer','property','agents'));
     @endphp
 
     <!-- Property -->
     <div class="grid grid-cols-1 px-4 pt-6 xl:gap-4 dark:bg-gray-900">
         <div class="mb-4 col-span-full xl:mb-2">
-            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Sold Information</h1>
+            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Inquiry Information</h1>
         </div>
 
         <div class="col-span-1 xl:col-span-2">
@@ -83,7 +83,7 @@
                         </div>
                         <div class="col-span-6 sm:col-span-3">
                             <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                            <input disabled type="text" value="{{$customer->email}}" name="name" id="name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="name" required>
+                            <input disabled type="text" value="{{$customerinf->email}}" name="name" id="name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="name" required>
                         </div>
                 </div>
             </div>
@@ -95,7 +95,7 @@
         <div id="custom-controls-gallery" class="relative w-full" data-carousel="slide">
             <form method="POST" class="max-w-sm mx-auto" action="{{ route('broker.inquireassign', ['customer_id' => $customer->id, 'property_id' => $property->id, 'agent_id' => $agentaaa->id]) }}">
                 @csrf
-                <label for="selectedAgent" name="selectedAgent" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Agent</label>
+                <label for="selectedAgent" name="selectedAgent" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Agent to be Assigned</label>
                 <select id="selectedAgent" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option selected disabled>Agents on your Team</option>
                     @foreach ($agents as $agentaaa)
