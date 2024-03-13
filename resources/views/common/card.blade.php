@@ -1,4 +1,4 @@
-@if (!empty($properties))
+@if ($properties->isNotEmpty())
 @if ($properties)
   @foreach ($properties as $property)
 
