@@ -141,7 +141,7 @@ Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('s
     Route::get('/agent/profile', [AgentController::class, 'agentprofile'])->name('agent.profile');
     Route::post('/agent/update', [AgentController::class, 'update'])->name('agent.update');
 
-    Route::get('/agent/inquiredetails/{property_id}/{customer_id}', [AgentController::class, 'inquiredetails'])->name('agent.inquiredetails');
+    Route::get('/agent/inquirydetails/{property_id}/{customer_id}', [AgentController::class, 'inquiredetails'])->name('agent.inquiredetails');
 
     //Schedules
     Route::prefix('schedule')->group(function () {
