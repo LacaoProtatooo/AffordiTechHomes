@@ -58,6 +58,7 @@ Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('s
     Route::get('/admin/dashboard', [Admincontroller::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/profile', [Admincontroller::class, 'adminprofile'])->name('admin.profile');
     Route::post('/admin/update', [Admincontroller::class, 'update'])->name('admin.update');
+    
 
     Route::get('/admin/brokers', [Admincontroller::class, 'brokers'])->name('admin.brokers');
     Route::get('/admin/{id}/brokerprofile', [Admincontroller::class, 'brokerprofile'])->name('admin.brokerprofile');
@@ -68,6 +69,9 @@ Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('s
     Route::get('/admin/{id}/propertydetails', [Admincontroller::class, 'details'])->name('admin.propertydetails');
     Route::get('/admin/{id}/propertyapprove', [Admincontroller::class, 'approve'])->name('admin.approveproperty');
     Route::get('/admin/{id}/propertyreject', [Admincontroller::class, 'reject'])->name('admin.rejectproperty');
+
+    Route::get('/admin/{id}/brokerAssignForm/', [Admincontroller::class, 'assignForm'])->name('admin.brokerassignform');
+    Route::post('/admin/{id}/assignbroker/', [Admincontroller::class, 'brokerAssign'])->name('admin.brokerAssign');
 
     // Property Create
     Route::get('/property/create', [PropertyController::class, 'create'])->name('property.create');
