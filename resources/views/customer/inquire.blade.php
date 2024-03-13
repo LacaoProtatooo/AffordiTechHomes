@@ -23,7 +23,7 @@
         <table class="min-w-full bg-white">
           <thead class="bg-gray-100">
             <tr>
-              <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Property ID</th>
+              <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Property Description</th>
               <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Address</th>
               <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Broker Name</th>
               <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Broker Contact</th>
@@ -35,7 +35,7 @@
           <tbody class="text-gray-700">
             @foreach ($inquires as $inquire)
             <tr>
-                <td class="py-3 px-4">{{ $inquire->property_id }}</td>
+                <td class="py-3 px-4">{{ $inquire->description }}</td>
                 <td class="py-3 px-4">{{ $inquire->property_address }}</td>
                 <td class="py-3 px-4">{{ $inquire->broker_name }}</td>
                 <td class="py-3 px-4">{{ $inquire->broker_contact }}</td>
