@@ -18,7 +18,10 @@ class BrokerController extends Controller
     {
         $user = auth()->user();
         $brokerinfo = Broker::where('user_id', $user->id)->first();
-        $properties = Property::All();
+        $brokerId = $brokerinfo->id;
+        $properties = Property::whereHas('propertyBrokers', function ($query) use ($brokerId) {
+            $query->where('broker_id', $brokerId);
+        })->get();
         return view('broker.index',compact('brokerinfo','properties'));
     }
 
