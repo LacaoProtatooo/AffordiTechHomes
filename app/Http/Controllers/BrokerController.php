@@ -230,4 +230,20 @@ class BrokerController extends Controller
         
         return redirect()->back()->with('error', 'No proof of payment uploaded.');
     }
+
+    public function transaction()
+    {
+        $user = auth()->user();
+        $broker = Broker::where('user_id', $user->id)->first();
+
+        $solds = DB::table('solds as s')
+        ->join('properties as p', 's.property_id', '=', 'p.id')
+        ->join('customers as c', 's.customer_id', '=', 'c.id')
+        ->join('agents as a', 's.agent_id', '=', 'a.id')
+        ->where('a.broker_id', $broker->id)
+        ->select('s.property_id', 'p.price' ,'p.description', 'p.address', 'c.name as customer_name', 'c.phone_number as customer_contact', 'a.name as agent_name', 'a.phone_number as agent_contact', 's.payment_method')
+        ->get();
+
+        return view('broker.transaction', compact('solds'));
+    }
 }
