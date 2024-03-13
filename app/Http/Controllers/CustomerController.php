@@ -21,7 +21,7 @@ class CustomerController extends Controller
     {
         $user = auth()->user();
         $customerinfo = Customer::where('user_id', $user->id)->first();
-        $properties = Property::where('status','available');
+        $properties = Property::where('status','available')->get();
         return view('customer.index', compact('properties','customerinfo'));
     }
 
@@ -86,13 +86,26 @@ class CustomerController extends Controller
     $user = auth()->user();
     $customer = Customer::where('user_id', $user->id)->first();
 
-    $inquires = DB::table('inquiries as i')
+    /*$inquires = DB::table('inquiries as i')
     ->join('customers as c', 'i.customer_id', '=', 'c.id')
     ->join('brokers as b', 'i.broker_id', '=', 'b.id')
     ->leftJoin('agents as a', 'i.agent_id', '=', 'a.id')
     ->join('properties as p', 'i.property_id', '=', 'p.id')
     ->where('i.customer_id', $customer->id)
     ->select('i.*', 'c.*', 'b.name as broker_name', 'b.phone_number as broker_contact', 'a.name as agent_name', 'a.phone_number as agent_contact', 'p.address as property_address','p.description')
+    ->get();*/
+    $inquires = DB::table('inquiries as i')
+    ->join('customers as c', 'i.customer_id', '=', 'c.id')
+    ->join('brokers as b', 'i.broker_id', '=', 'b.id')
+    ->leftJoin('agents as a', 'i.agent_id', '=', 'a.id')
+    ->join('properties as p', 'i.property_id', '=', 'p.id')
+    ->where('i.customer_id', $customer->id)
+    ->whereNotExists(function ($query) {
+        $query->select(DB::raw(1))
+              ->from('solds')
+              ->whereRaw('solds.property_id = i.property_id');
+    })
+    ->select('i.*', 'c.*', 'b.name as broker_name', 'b.phone_number as broker_contact', 'a.name as agent_name', 'a.phone_number as agent_contact', 'p.address as property_address', 'p.description')
     ->get();
 
     return view('customer.inquire', compact('customer','inquires'));
