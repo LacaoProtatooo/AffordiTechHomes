@@ -80,7 +80,7 @@ class BrokerController extends Controller
         $user = Auth::user();
         $broker = Broker::where('user_id', $user->id)->first();
         $customer = Customer::where('id', $customer_id)->first();
-        $customerinf = User::where('id', $customer->id)->first();
+        $customerinf = User::where('id', $customer->user_id)->first();
         $property = Property::where('id', $property_id)->first();
         $agents = Agent::where('broker_id', $broker->id)->get();
 
@@ -93,12 +93,25 @@ class BrokerController extends Controller
     }
 
     public function inquireassign($customer_id, $property_id, $agent_id){
-        $inquiry = Inquire::where('customer_id', $customer_id)
+        $user = Auth::user();
+        $broker = Broker::where('user_id', $user->id)->first();
+    
+        // Update the Inquire record based on the provided conditions
+        $affectedRows = Inquire::where('customer_id', $customer_id)
                         ->where('property_id', $property_id)
+                        ->where('broker_id', $broker->id)
                         ->update(['agent_id' => $agent_id]);
-        
-        return redirect()->route('broker.dashboard');
+    
+        // Check if any rows were affected by the update operation
+        if ($affectedRows > 0) {
+            return redirect()->route('broker.dashboard')->with('success', 'Update Successfully');
+        } else {
+            // Handle the case where no matching inquiry was found
+            return redirect()->route('broker.dashboard')->with('error', 'Inquiry not found');
+        }
     }
+    
+    
     
 
     public function agent()
@@ -201,7 +214,7 @@ class BrokerController extends Controller
         return view('broker.soldto',compact('broker','property','customer','agent'));
     }
 
-    public function sold(Request $request, $customer_id, $property_id, $agent_id)
+    public function sold(Request $request, $property_id, $customer_id, $agent_id)
     {
         $request->validate([
             'payment_method' => 'required|in:cash,bank,check',
