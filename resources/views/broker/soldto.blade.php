@@ -13,30 +13,38 @@
 <body class="bg-green-200 ">
     @include('message') 
 @include('common.header')
-
 <div class="max-w-3xl mx-auto mt-8 mb-8 p-8 bg-white rounded-lg shadow-lg">
     <h2 class="text-2xl font-semibold mb-4">Property Details</h2>
     <div class="grid grid-cols-2 gap-4">
         <div>
-            <p><span class="font-semibold">Property ID:</span> {{ $property->id }}</p>
-            <p><span class="font-semibold">Property Description:</span> {{ $property->description }}</p>
-            <p><span class="font-semibold">Address:</span> {{ $property->address }}</p>
+            <p><span class="font-semibold">Property ID:</span> {{$property->id}}</p>
+            <p><span class="font-semibold">Property Description:</span> {{$property->description}}</p>
+            <p><span class="font-semibold">Address:</span> {{$property->address}}</p>
         </div>
         <div>
-            <p><span class="font-semibold">Customer Name:</span> {{ $customer->name }}</p>
-            <p><span class="font-semibold">Customer Phone Number:</span> {{ $customer->phone_number }}</p>
+            <p><span class="font-semibold">Customer Name:</span> {{$customer->name}}</p>
+            <p><span class="font-semibold">Customer Phone Number:</span> {{$customer->phone_number}}</p>
+        </div>
+        <div>
+            <p><span class="font-semibold">Agent Name: {{$agent->name}}</span></p>
+            <p><span class="font-semibold">Agent Phone Number: {{$agent->phone_number}}</span></p>
+        </div>
+        <div>
+            <p><span class="font-semibold">Broker Name:</span> {{$broker->phone_number}}</p>
+            <p><span class="font-semibold">Broker Phone Number:</span> {{$broker->phone_number}}</p>
         </div>
     </div>
     <div class="mt-8">
         <h2 class="text-2xl font-semibold mb-4">Payment Details</h2>
-        <form action="{{ route('agent.sold', ['property_id' => $property->id, 'customer_id' => $customer->id]) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('broker.sold', ['property_id' => $property->id, 'customer_id' => $customer->id, 'agent_id' => $agent->id]) }}" method="POST" enctype="multipart/form-data">
+
             @csrf
             <div class="flex items-center mb-4">
                 <label for="payment_method" class="mr-2 font-semibold">Payment Method:</label>
                 <select id="payment_method" name="payment_method" class="py-2 px-4 border border-gray-300 rounded">
                     <option value="cash">Cash</option>
-                    <option value="bank">Bank</option>
-                    <option value="gcash">GCash</option>
+                    <option value="bank">Bank Transfer</option>
+                    <option value="check">Check</option>
                 </select>
             </div><br>
             <div class="mb-4">
