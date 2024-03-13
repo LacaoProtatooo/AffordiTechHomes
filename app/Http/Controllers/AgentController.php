@@ -42,8 +42,16 @@ class AgentController extends Controller
         $solds = DB::table('solds')
         ->join('properties', 'solds.property_id', '=', 'properties.id')
         ->join('customers', 'solds.customer_id', '=', 'customers.id')
-        ->where('properties.agent_id', $agent->id)
-        ->select('solds.property_id','properties.price','customers.name as customer_name', 'customers.phone_number as customer_phone_number','solds.payment_method')
+        ->join('agents', 'solds.agent_id', '=', 'agents.id')
+        ->join('brokers', 'agents.broker_id', '=', 'brokers.id')
+        ->select(
+            'properties.*',
+            'solds.payment_method',
+            'customers.name AS customer_name',
+            'customers.phone_number AS customer_contact',
+            'brokers.name AS broker_name'
+        )
+        ->where('solds.agent_id', $agent->id)
         ->get();
 
         return view('agent.transaction', compact('solds'));
@@ -118,13 +126,21 @@ class AgentController extends Controller
         $user = auth()->user();
         $agent = Agent::where('user_id', $user->id)->first();
         
-        $inquiries = Inquire::join('properties', 'inquiries.property_id', '=', 'properties.id')
-        ->join('agents', 'properties.agent_id', '=', 'agents.id')
+        $inquiries = DB::table('inquiries')
+        ->join('properties', 'inquiries.property_id', '=', 'properties.id')
         ->join('customers', 'inquiries.customer_id', '=', 'customers.id')
-        ->where('agents.id', $agent->id)
-        ->where('properties.status', 'available')
-        ->select('inquiries.*', 'properties.address', 'customers.name as customer_name', 'customers.phone_number as customer_phone_number')
-        ->orderBy('inquiries.property_id', 'asc')
+        ->join('agents', 'inquiries.agent_id', '=', 'agents.id')
+        ->join('brokers', 'agents.broker_id', '=', 'brokers.id')
+        ->select(
+            'properties.description AS property_description',
+            'properties.address AS property_address',
+            'properties.price AS property_price',
+            'properties.address AS property_address',
+            'customers.name AS customer_name',
+            'customers.phone_number AS customer_contact',
+            'brokers.name AS broker_name'
+        )
+        ->where('inquiries.agent_id', $agent->id)
         ->get();
 
         return view('agent.inquire', compact('inquiries', 'agent'));
