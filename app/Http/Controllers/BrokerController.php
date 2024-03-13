@@ -7,6 +7,7 @@ use App\Models\Customer;
 use App\Models\User;
 use App\Models\Agent;
 use App\Models\Inquire;
+use App\Models\Solds;
 use App\Models\Property;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -46,29 +47,28 @@ class BrokerController extends Controller
     {
         $user = auth()->user();
         $broker = Broker::where('user_id', $user->id)->first();
- 
-        /*$inquiries = Inquire::
-        join('property_has_broker as phb_property_id', 'inquiries.property_id', '=', 'phb_property_id.property_id')
-        ->join('properties as pph','phb_property_id.property_id','=','pph.id')
-        ->join('customers', 'inquiries.customer_id', '=', 'customers.id')
-        ->leftJoin('agents', 'inquiries.agent_id', '=', 'agents.id')
-        ->join('property_has_broker as phb_broker_id', 'inquiries.broker_id', '=', 'phb_broker_id.broker_id')
-        ->where('phb_broker_id.broker_id', $broker->id)
-        ->where('pph.status', 'available')
-        ->get();*/
 
-        $inquiries = DB::table('inquiries as i')
+        /*$inquiries = DB::table('inquiries as i')
         ->join('customers as c', 'i.customer_id', '=', 'c.id')
         ->join('brokers as b', 'i.broker_id', '=', 'b.id')
         ->leftJoin('agents as a', 'i.agent_id', '=', 'a.id')
         ->join('properties as p', 'i.property_id', '=', 'p.id')
         ->where('i.broker_id', $broker->id)
         ->select('i.*', 'c.*','p.address','p.description','a.name as agent_name')
+        ->get();*/
+        $inquiries = DB::table('inquiries as i')
+        ->join('customers as c', 'i.customer_id', '=', 'c.id')
+        ->join('brokers as b', 'i.broker_id', '=', 'b.id')
+        ->leftJoin('agents as a', 'i.agent_id', '=', 'a.id')
+        ->join('properties as p', 'i.property_id', '=', 'p.id')
+        ->where('i.broker_id', $broker->id)
+        ->whereNotExists(function ($query) {
+        $query->select(DB::raw(1))
+            ->from('solds')
+            ->whereRaw('solds.property_id = i.property_id');
+        })
+        ->select('i.*', 'c.*', 'p.address', 'p.description', 'a.name as agent_name')
         ->get();
-
-        /*foreach( $inquiries as $inquiry ){
-            $customers = Customer::where('id', $inquiry->customer_id)->get();
-        }*/
 
         $agents = Agent::where('broker_id', $broker->id)->get();
         
@@ -189,5 +189,45 @@ class BrokerController extends Controller
         $Broker->save();
 
         return redirect()->route('admin.dashboard')->with('successregister', true);
+    }
+
+    public function soldForm($propety_id,$customer_id,$agent_id)
+    {
+        $user = Auth::user();
+        $broker = Broker::where('user_id', $user->id)->first();
+        $property = Property::where('id',$propety_id)->first();
+        $customer = Customer::where('id',$customer_id)->first();
+        $agent = Agent::where('id',$agent_id)->first();
+        return view('broker.soldto',compact('broker','property','customer','agent'));
+    }
+
+    public function sold(Request $request, $customer_id, $property_id, $agent_id)
+    {
+        $request->validate([
+            'payment_method' => 'required|in:cash,bank,check',
+            'proof_of_payment' => 'required|image|max:2048', 
+        ]);
+    
+        if ($request->hasFile('proof_of_payment')) {
+            $image = $request->file('proof_of_payment');
+            $filename = uniqid() . '_' . $image->getClientOriginalName();
+            $path = $image->storeAs('public', $filename); 
+            $imagePath = 'storage/' . $filename; 
+    
+            Solds::create([
+                'customer_id' => $customer_id,
+                'property_id' => $property_id,
+                'agent_id' => $agent_id,
+                'payment_method' => $request->payment_method,
+                'proof_payment' => $imagePath, 
+            ]);
+
+            $property = Property::find($property_id);
+            $property->status = 'sold';
+            $property->save();  
+            return redirect()->route('broker.dashboard')->with('success', 'Property Sold successfully!');
+        }
+        
+        return redirect()->back()->with('error', 'No proof of payment uploaded.');
     }
 }
