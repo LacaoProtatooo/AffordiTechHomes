@@ -54,20 +54,31 @@ class AgentController extends Controller
     // Index
     public function index()
     {  
-        return view('agent.index');
-
         $user = Auth::user();
-        $inquiries = Inquire::where('agent_id', $user->id)
+        $agent = Agent::where('user_id', $user->id)->first();
+        $inquiries = Inquire::where('agent_id', $agent->id)
         ->join('properties', 'inquiries.property_id','=', 'properties.id')
         ->get();
 
-        dd($inquiries);
+        $properties = null;
+        $customers = null;
 
         foreach ($inquiries as $inq) {
             $properties = Property::where('id', $inq->property_id)->get();
+            $customers = Customer::where('id', $inq->customer_id)->get();   
         }
 
-        return view('agent.index',compact('inquiries','properties'));
+        return view('agent.index',compact('inquiries','properties','customers'));
+    }
+
+    public function inquiredetails($property_id, $customer_id){
+        $user = Auth::user();
+        $agent = Agent::where('user_id', $user->id)->first();
+        $property = Property::where('id', $property_id)->first();
+        $customer = Customer::where('id', $customer_id)->first();
+        $customerinf = User::where('id', $customer->user_id)->first();
+
+        return view('agent.inquiredetails', compact('property','customer','agent','customerinf'));
     }
 
     // Register

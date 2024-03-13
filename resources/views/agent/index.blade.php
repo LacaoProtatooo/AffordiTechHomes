@@ -26,7 +26,7 @@
                 <button onclick="location.href='{{ route('agent.appointment') }}';" class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
                     <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">Check Appointments</span>
                 </button>
-                {{-- Inquiry --}}
+                 {{-- Check Previous Clients --}}
                 <button onclick="location.href='{{route('agent.inquiry')}}';" class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
                     <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">Check Inquiries</span>
                 </button>
@@ -36,8 +36,8 @@
                 </button>
             </div>
         </div>
+    </div>
 
-        </div>
     </nav>
 
     {{-- TABLE --}}
@@ -47,57 +47,88 @@
                 <thead class="text-xs text-white uppercase dark:bg-gray-700 dark:text-gray-400 bg-green-900">
                     <tr>
                         <th scope="col" class="px-6 py-3">
-                            <span class="sr-only">Edit</span>
+                            Customer Name
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            <span class="sr-only">Delete</span>
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Approval Status
+                            Contact No.
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Property Type
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Address
+                            Description
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Price
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Description
+                            Address
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Rooms
+                            Block
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Sq Meters
+                            Unit
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            CR
+                            Square Area
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Availability
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Parking
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Images
+                            <span class="sr-only"></span>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($inquiries as $inquire)
-                        <td scope="col" class="px-6 py-3">
-                            
-                        </td>
+                        {{-- PROPERTY INQUIRE INFORMATION --}}
+                        @foreach ($customers as $customer)
+                            @if ($inquire->customer_id == $customer->id)
+                                <td scope="col" class="px-6 py-3 text-white">
+                                    {{ $customer->name }}
+                                </td>
+                                <td scope="col" class="px-6 py-3 text-white">
+                                    {{ $customer->phone_number }}
+                                </td>
+                            @endif
+                        @endforeach
+
+                        @foreach ($properties as $property)
+                            @if ($inquire->property_id == $property->id)
+                                <td scope="col" class="px-6 py-3 text-white">
+                                    {{ $property->property_type }}
+                                </td>
+                                <td scope="col" class="px-6 py-3 text-white">
+                                    {{ $property->description }}
+                                </td>
+                                <td scope="col" class="px-6 py-3 text-white">
+                                    {{ $property->price }}
+                                </td>
+                                <td scope="col" class="px-6 py-3 text-white">
+                                    {{ $property->address }}
+                                </td>
+                                <td scope="col" class="px-6 py-3 text-white">
+                                    {{ $property->block }}
+                                </td>
+                                <td scope="col" class="px-6 py-3 text-white">
+                                    {{ $property->unit }}
+                                </td>
+                                <td scope="col" class="px-6 py-3 text-white">
+                                    {{ $property->sqm }}
+                                </td>
+                                <td scope="col" class="px-6 py-3 text-white">
+                                    {{ $property->status }}
+                                </td>
+                                <td scope="col" class="px-6 py-3">
+                                    <button type="button" onclick="location.href='{{ route('agent.inquiredetails', ['property_id' => $property->id, 'customer_id' => $inquire->customer_id]) }}'"
+                                    class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">View Details</button>
+                                </td>
+                            @endif
+                        @endforeach
                         
                     @endforeach
-                    <td scope="col" class="px-6 py-3">
-                        <button type="button" class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">View Details</button>
-                    </td>
-
                 </tbody>
             </table>
         </div>
