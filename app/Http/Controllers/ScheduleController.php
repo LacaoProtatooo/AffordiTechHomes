@@ -14,18 +14,7 @@ use App\Models\Customer_schedule;
 use App\Models\Visit;
 class ScheduleController extends Controller
 {
-    public function CustomerScheduleStore($id)
-    {
-        $user = auth()->user();
-        $customerinfo = Customer::where('user_id',$user->id)->first();
-        $customerSchedule = new Customer_schedule();
-        $customerSchedule->customer_id = $customerinfo->id;
-        $customerSchedule->schedule_id = $id;
-        $customerSchedule->save();
-        return redirect()->route('customer.dashboard')->with('booked successfully.');
-        
-    }
-
+   
     public function create($property_id, $customer_id)
     {
         $user = auth()->user();
