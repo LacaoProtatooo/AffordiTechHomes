@@ -74,6 +74,7 @@
 
             @endif
         </div>
+    </div>
     <script>
         function confirmInquiry(inquiryUrl) {
             // Display confirmation dialog
