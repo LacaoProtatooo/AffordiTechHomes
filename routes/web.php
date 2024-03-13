@@ -47,12 +47,6 @@ Route::match(['get', 'post'], '/logout', [LoginController::class, 'logout'])->na
 Route::get('/register/{role}', [LoginController::class, 'signup'])->name('signup.show');
 Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('signup.submit');
 
-// Admin:
-// Broker Create
-// Property Create 
-// Approves Convoy and Scheduling (MUST FINISH AGENT AND BROKER INTERFACE FIRST)
-// Monitors and Approves Unit Sold 
-
 // ADMIN
 //Route::middleware('admin')->group(function () {
     Route::get('/admin/dashboard', [Admincontroller::class, 'index'])->name('admin.dashboard');
@@ -100,14 +94,13 @@ Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('s
     Route::post('/broker/view/sold/', [BrokerController::class, 'sold'])->name('broker.sold');
 
     Route::get('/broker/view/transaction', [BrokerController::class, 'transaction'])->name('broker.transaction');
+
     // Route::get('/agent/soldto/{customer_id}/{property_id}', [PropertyController::class, 'soldto'])->name('agent.soldto');    broker.inquiredetails
     // Route::post('/agent/soldtox/{customer_id}/{property_id}', [PropertyController::class, 'sold'])->name('agent.sold');
 
     // To Be Implemented onto Broker Middleware
     // Route::get('/admin/{id}/agentprofile', [Admincontroller::class, 'agentprofile'])->name('admin.agentprofile');
     // Route::get('/admin/{id}/delete', [Admincontroller::class, 'delete'])->name('admin.agentdelete');
-  
-
 
 //});
 
@@ -145,17 +138,7 @@ Route::post('/register/{role}', [LoginController::class, 'signupuser'])->name('s
         Route::post('/store/{property_id}/{customer_id}', [ScheduleController::class, 'store'])->name('schedule.store');
     });
 
-    
-    // OLD
-    Route::get('/agent/soldto/{customer_id}/{property_id}', [PropertyController::class, 'soldto'])->name('agent.soldto');
-    Route::post('/agent/soldtox/{customer_id}/{property_id}', [PropertyController::class, 'sold'])->name('agent.sold');
-
-    
-
 //});
-
-
-
 
 // Property Info
 Route::get('/property/info', [PropertyController::class, 'propertyinfo'])->name('property.info');
