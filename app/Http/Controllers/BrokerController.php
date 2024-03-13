@@ -73,12 +73,13 @@ class BrokerController extends Controller
         return view('broker.inquiredetails', compact('customer','property','agents'));
     }
 
-    public function inquireassign($customer_id, $property_id, $agent_id){
-        $inquiry = Inquire::where('customer_id', $customer_id)->where('property_id', $property_id)->first();
+    public function inquireassign($customer_id, $property_id, $agent_id) {
+        // Update the agent_id for the specified customer_id and property_id
+        Inquire::where('customer_id', $customer_id)
+               ->where('property_id', $property_id)
+               ->update(['agent_id' => $agent_id]);
     
-        $inquiry->agent_id = $agent_id;
-        $inquiry->save();
-    
+        // Redirect to the appropriate route
         return redirect()->route('broker.dashboard');
     }
     
