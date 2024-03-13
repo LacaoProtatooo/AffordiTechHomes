@@ -15,6 +15,5 @@ class Inquire extends Model
         'customer_id',
         'broker_id',
         'agent_id',
-        
     ];
 }
