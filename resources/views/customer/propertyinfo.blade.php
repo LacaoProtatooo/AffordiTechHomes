@@ -53,18 +53,18 @@
         {{-- DETAILS --}}
         <div class="grid md:grid-cols-2 md:gap-2 mb-4 mt-4">
             <div class="mb-1">
-                <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Property Description: {{$property->description}}</p><br>
-                <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Property Developer: {{$property->developer}}</p><br>
-                <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Property Type: {{$property->property_type}}</p><br>
-                <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Property Unit: {{$property->unit}}</p><br>
-                <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Property Block: {{$property->block}}</p><br>
+                <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Property Description:<b> {{$property->description}} </b></p><br>
+                <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Property Developer:<b> {{$property->developer}}</b></p><br>
+                <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Property Type:<b> {{$property->property_type}}</b></p><br>
+                <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Property Unit:<b> {{$property->unit}}</b></p><br>
+                <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Property Block:<b> {{$property->block}}</b></p><br>
             </div>
             <div class="mb-1">
-                <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Bedrooms: {{$property->rooms}}</p><br>
-                <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Comfort Rooms: {{$property->cr}}</p><br>
-                <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Property Area: {{$property->sqm}}</p><br>
-                <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Property Price: {{$property->price}}</p><br>
-                <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Property Address: {{$property->address}}</p><br>
+                <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Bedrooms:<b> {{$property->rooms}}</b></p><br>
+                <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Comfort Rooms:<b> {{$property->cr}}</b></p><br>
+                <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Property Area:<b> {{$property->sqm}}</b></p><br>
+                <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Property Price:<b> {{$property->price}}</b></p><br>
+                <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Property Address:<b> {{$property->address}}</b></p><br>
             </div>
         </div>
         
