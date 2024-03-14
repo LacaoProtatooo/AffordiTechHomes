@@ -10,10 +10,8 @@ use App\Models\Agent;
 use App\Models\Broker;
 use App\Models\Property;
 use App\Models\Approval;
-use App\Models\Schedules;
 use App\Models\Inquire;
 use App\Models\Propertybroker;
-use App\Models\Customer_schedule;
 use App\Models\Adminsold;
 
 use Illuminate\Http\Request;
@@ -206,15 +204,20 @@ class AdminController extends Controller
         return redirect()->route('admin.dashboard');
     }
 
-    public function details($id){
-        $propertyinfo = Property::find($id);
-        $agentinfo = Agent::where('id', $propertyinfo->agent_id)->first();
-        $soldproperty = Solds::where('property_id', $propertyinfo->id)->first();
-        $customerinfo = Customer::where('id', $soldproperty->customer_id)->first();
-        $usercustomer = User::where('id', $customerinfo->user_id)->first();
-        $useragent = User::where('id', $agentinfo->user_id)->first();
+    public function details($propertyid,  $agentid){
+        $propertyinfo = Property::find($propertyid);
 
-        return View('admin.propertydetails', compact('propertyinfo','agentinfo','soldproperty','customerinfo','usercustomer','useragent'));
+        $inqproperty = Inquire::where('property_id', $propertyid)
+        ->where('agent_id', $agentid)
+        ->first();
+
+        $customerinfo = Customer::where('id', $inqproperty->customer_id)->first();
+        $usercustomer = User::where('id', $customerinfo->user_id)->first();
+        $agentinfo = Agent::find($agentid);
+        $useragent = User::where('id', $agentinfo->user_id)->first();
+        $soldproperty = Solds::where('property_id', $propertyid)->first();
+
+        return View('admin.propertydetails', compact('propertyinfo','agentinfo','customerinfo','usercustomer','useragent','soldproperty'));
     }
 
     public function assignForm($id){

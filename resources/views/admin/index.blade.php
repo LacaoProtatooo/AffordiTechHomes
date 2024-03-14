@@ -236,14 +236,20 @@
                         </td>
                         <td>
                           @if ($property->status != 'available')
-                          @php $verified = false; @endphp
-                          @foreach ($Adminsold as $adminsol)
-                          @if ($adminsol->property_id == $property->id)
-                          Verified
-                          @php $verified = true; @endphp
-                          @break
-                          @endif
-                          @endforeach
+                            @php $verified = false; @endphp
+                            @foreach ($Adminsold as $adminsol)
+                              
+                              @if ($adminsol->property_id == $property->id)
+                                  @php
+                                    $agentinff = \App\Models\Agent::where('name', $agent)->first();
+                                  @endphp
+                                  @if (isset($agentinff) && $agentinff != NULL)
+                                      <button type="button" onclick="window.location.href='{{ route('admin.propertydetails', ['propertyid' => $property->id, 'agentid' => $agentinff->id] ) }}'" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-0">Details</button>
+                                  @endif     
+                                @php $verified = true; @endphp
+                              @break
+                              @endif
+                            @endforeach
                           @if (!$verified)
                           <button type="button" onclick="window.location.href='{{ route('admin.verify', $property->id) }}'" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-0">Verify</button>
                           @endif

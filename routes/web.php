@@ -59,7 +59,8 @@ Route::middleware('admin')->group(function () {
     Route::post('/admin/{id}/brokerupdate', [AdminController::class, 'brokerupdate'])->name('admin.brokerupdate');
     
     Route::get('/admin/properties', [Admincontroller::class, 'properties'])->name('admin.properties');
-    Route::get('/admin/{id}/propertydetails', [Admincontroller::class, 'details'])->name('admin.propertydetails');
+
+    Route::get('/admin/{propertyid}/{agentid}/propertydetails', [Admincontroller::class, 'details'])->name('admin.propertydetails');
     Route::get('/admin/{id}/propertyapprove', [Admincontroller::class, 'approve'])->name('admin.approveproperty');
     Route::get('/admin/{id}/propertyreject', [Admincontroller::class, 'reject'])->name('admin.rejectproperty');
 
