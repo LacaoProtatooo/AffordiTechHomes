@@ -1,70 +1,199 @@
-<<<<<<< HEAD
-# SAAD_Draft
-=======
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# AffordiTechHomes
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+![AffordiTechHomes Logo](readme_pics/Logo_BG_Removed.png)
 
-## About Laravel
+A modern real estate web application built with Laravel and Vue.js, designed to connect property buyers, sellers, brokers, and agents in one seamless platform.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 📋 Prerequisites
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Make sure the following software is installed on your system:
 
-## Learning Laravel
+- **XAMPP** - Apache and MySQL server
+- **PHP** (version 8.1 or higher)
+- **Composer** - PHP dependency manager
+- **Node.js** - JavaScript runtime (includes npm)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## 🚀 Installation
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 1. Clone the Repository
 
-## Laravel Sponsors
+```bash
+git clone https://github.com/your-username/AffordiTechHomes.git
+cd AffordiTechHomes
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 2. Install PHP Dependencies
 
-### Premium Partners
+```bash
+composer install
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### 3. Install Node.js Dependencies
 
-## Contributing
+```bash
+npm install
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+> **Note:** If you encounter peer dependency issues, use:
+> ```bash
+> npm install --legacy-peer-deps
+> ```
 
-## Code of Conduct
+### 4. Environment Setup
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Copy the example environment file and configure your database:
 
-## Security Vulnerabilities
+```bash
+cp .env.example .env
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Update the `.env` file with your database credentials:
 
-## License
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=afforditechhomes
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
->>>>>>> 47ce6a8 (first commit)
+### 5. Generate Application Key
+
+```bash
+php artisan key:generate
+```
+
+### 6. Run Database Migrations
+
+```bash
+php artisan migrate
+```
+
+### 7. Create Storage Symlink
+
+```bash
+php artisan storage:link
+```
+
+### 8. Seed the Database
+
+```bash
+php artisan db:seed
+```
+
+---
+
+## ▶️ Running the Application
+
+You need to run **two terminals** simultaneously:
+
+### Terminal 1 - Laravel Backend Server
+
+```bash
+php artisan serve
+```
+
+### Terminal 2 - Vite Development Server
+
+```bash
+npm run dev
+```
+
+The application will be available at: **http://localhost:8000**
+
+---
+
+## 🔐 Default Accounts
+
+After seeding, the following accounts are available:
+
+| Role   | Email              | Password    |
+|--------|--------------------|-------------|
+| Admin  | admin@gmail.com    | 123123123   |
+| Broker | broker1@gmail.com  | 123123123   |
+| Broker | broker2@gmail.com  | 123123123   |
+| Agent  | agent1@gmail.com   | 123123123   |
+| Agent  | agent2@gmail.com   | 123123123   |
+| Agent  | agent3@gmail.com   | 123123123   |
+
+---
+
+## 📸 Application Demo
+
+### Home Page
+The main landing page where users can browse featured properties and navigate through the platform.
+
+![User Home Page](readme_pics/user_home-page.jpg)
+
+---
+
+### Properties Listing
+Browse all available properties with detailed information, pricing, and filtering options.
+
+![Properties Page](readme_pics/properties.JPG)
+
+---
+
+### About Page
+Learn more about AffordiTechHomes, our mission, and the team behind the platform.
+
+![About Page](readme_pics/about_page.jpg)
+
+---
+
+### Profile Page
+User profile management where users can view and update their personal information.
+
+![Profile Page](readme_pics/profile_page.jpg)
+
+---
+
+### Admin Dashboard
+Administrative control panel for managing users, properties, brokers, and agents.
+
+![Admin Dashboard](readme_pics/admin_dashboard.jpg)
+
+---
+
+### Admin Property Management
+Admin interface for adding, editing, and managing property listings.
+
+![Admin Property Page](readme_pics/admin_property-page.jpg)
+
+---
+
+### Cityscape View
+Beautiful cityscape imagery showcasing the urban properties available on the platform.
+
+![Cityscape](readme_pics/cityscape.jpg)
+
+---
+
+## 🛠️ Tech Stack
+
+- **Backend:** Laravel (PHP)
+- **Frontend:** Vue.js with Vite
+- **Styling:** Tailwind CSS
+- **Database:** MySQL
+- **Authentication:** Laravel Sanctum
+
+---
+
+## 📄 License
+
+This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+---
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome! Feel free to check the issues page.
+
+---
+
+**Made with ❤️ by AffordiTechHomes Team**
